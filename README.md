@@ -1,14 +1,11 @@
 # 快代理SDK - Python
 
-### API部分:
-* python/api_urllib2.py: 使用urllib2调用api示例
-	* 使用提示: 运行环境要求`python2.6/2.7`
-* python3/api_urllib.py: 使用urllib调用api示例
-	* 使用提示: 运行环境要求`python3.x`
-* python/api_requests.py: 使用requests库调用api示例
-	* 使用提示:
-		* 此样例支持`python 2.6—2.7以及3.3—3.7`
-		* [requests](http://docs.python-requests.org/zh_CN/latest/)不是python原生库，需要安装才能使用: `pip install requests`
+## 调用API
+| 文件 | 说明 | 使用提示 |
+| --- | --- | --- |
+| python/api_urllib2.py | 使用urllib2调用api示例 | 运行环境要求`python2.6/2.7` |
+| python/api_urllib.py | 使用urllib调用api示例 | 运行环境要求`python3.x` |
+| python/api_requests | 使用requests库调用api示例 | * 此样例支持`python 2.6—2.7以及3.3—3.7`<br> * [requests](http://docs.python-requests.org/zh_CN/latest/)不是python原生库，需要安装才能使用: `pip install requests` |
 
 ### Http代理-Python2部分:
 * python/proxy_urllib2.py: 使用urllib2请求Http代理服务器, 支持访问http和https网页, 推荐使用
@@ -93,7 +90,7 @@
 		* 请先安装socks: `pip install pysocks`
 
 
-### 技术支持
+## 技术支持
 
 如果您发现代码有任何问题, 请提交`Issue`。
 
