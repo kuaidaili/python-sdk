@@ -74,7 +74,7 @@
 		* socks5代理网页均可适用
 		* 使用此样例需要安装`selenium、PhantomJS`
 		* `PhantomJS`可以直接使用pip安装
-python/selenium_phantomjs_sock5_auth.py: 以`用户名密码`认证形式使用selenium库和PhantomJS驱动请求Socks代理服务器
+* python/selenium_phantomjs_sock5_auth.py: 以`用户名密码`认证形式使用selenium库和PhantomJS驱动请求Socks代理服务器
 	* 使用提示:
 		* 运行环境要求 `python2.x`
 		* socks5代理http/https网页均可适用
