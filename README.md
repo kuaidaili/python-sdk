@@ -18,8 +18,8 @@
 使用requests库调用api示例
 ```
 使用提示:
-	* 此样例支持 python 2.6—2.7以及3.3—3.7
-	* requests不是python原生库，需要安装才能使用: pip install requests
+    * 此样例支持 python 2.6—2.7以及3.3—3.7
+    * requests不是python原生库，需要安装才能使用: pip install requests
 ```
 
 ## Http代理-Python2部分:
@@ -40,28 +40,28 @@
 以`白名单`认证形式使用selenium库和Chrome驱动请求Http代理服务器
 ```
 使用提示:
-	* 基于白名单的http/https代理Chrome
-	* 运行环境要求`python2.x + selenium + Chrome + Chromedriver + xvfb`
-	* 安装xvfb：`pip install xvfbwrapper`
-	* Ubuntu下开发环境配置参考: https://christopher.su/2015/selenium-chromedriver-ubuntu/
+    * 基于白名单的http/https代理Chrome
+    * 运行环境要求`python2.x + selenium + Chrome + Chromedriver + xvfb`
+    * 安装xvfb：`pip install xvfbwrapper`
+    * Ubuntu下开发环境配置参考: https://christopher.su/2015/selenium-chromedriver-ubuntu/
 ```
 
 ### python/selenium_phantomjs_http.py
 以`白名单`认证形式使用selenium库和PhantomJS驱动请求Http代理服务器
 ```
 使用提示:
-	* 基于白名单的http/https代理PhantomJS
-	* 运行环境要求`python2.x + selenium + PhantomJS`
-	* `selenium + PhantomJS` 可以直接使用pip安装
+    * 基于白名单的http/https代理PhantomJS
+    * 运行环境要求`python2.x + selenium + PhantomJS`
+    * `selenium + PhantomJS` 可以直接使用pip安装
 ```
 
 ### python/selenium_phantomjs_http_auth.py
 以`用户名密码`认证形式使用selenium库和PhantomJS驱动请求Http代理服务器
 ```
 使用提示:
-	* 基于密码认证的http/https代理PhantomJS
-	* 运行环境要求`python2.x + selenium + PhantomJS`
-	* `selenium + PhantomJS` 可以直接使用pip安装
+    * 基于密码认证的http/https代理PhantomJS
+    * 运行环境要求`python2.x + selenium + PhantomJS`
+    * `selenium + PhantomJS` 可以直接使用pip安装
 ```
 
 ## Http代理-Python3部分:
@@ -70,16 +70,16 @@
 使用`urllib`库请求Http代理服务器, 支持访问http和https网页
 ```
 使用提示:
-	* 基于urllib的代码样例同时支持访问http和https网页，推荐使用
-	* 运行环境要求 python3.x
+    * 基于urllib的代码样例同时支持访问http和https网页，推荐使用
+    * 运行环境要求 python3.x
 ```
 
 ### python3/http_requests.py
 使用`requests`库请求Http代理服务器, 支持使用白名单访问http,https网页, 使用用户名密码不支持访问https网页
 ```
 使用提示:
-	* 基于requests的代码样例支持使用白名单访问http,https网页，使用用户名密码不支持访问https网页
-	* requests不是python原生库，需要安装才能使用: pip install requests
+    * 基于requests的代码样例支持使用白名单访问http,https网页，使用用户名密码不支持访问https网页
+    * requests不是python原生库，需要安装才能使用: pip install requests
 ```
 
 ## Http代理-Scrapy部分:
@@ -94,9 +94,9 @@
 使用代理
 ```
 使用提示:
-	* http/https网页均可适用
-	* scrapy不是python原生库，需要安装才能使用: pip install scrapy
-	* 在第一级scrapy_proxy目录下运行如下命令查看结果：scrapy crawl main
+    * http/https网页均可适用
+    * scrapy不是python原生库，需要安装才能使用: pip install scrapy
+    * 在第一级scrapy_proxy目录下运行如下命令查看结果：scrapy crawl main
 ```
 
 ## Socks代理-Python2部分:
@@ -105,48 +105,48 @@
 使用`requests`库请求Socks代理服务器
 ```
 使用提示:
-	* http/https网页均可适用
-	* 运行环境要求： requests >= 2.10.0
-	* socks支持是`requests`的额外特性，需要安装才能使用: pip install requests[socks]
+    * http/https网页均可适用
+    * 运行环境要求： requests >= 2.10.0
+    * socks支持是`requests`的额外特性，需要安装才能使用: pip install requests[socks]
 ```
 
 ### python/socks_urllib2.py
 使用`urllib2`库请求Socks代理服务器
 ```
 使用提示:
-	* 运行环境要求 python2.6 / 2.7
-	* http/https网页均可适用
-	* 使用此样例需要安装PySocks：pip install PySocks
+    * 运行环境要求 python2.6 / 2.7
+    * http/https网页均可适用
+    * 使用此样例需要安装PySocks：pip install PySocks
 ```
 
 ### python/selenium_chrome_sock5.py
 以`白名单`认证形式使用selenium库和Chrome驱动请求Socks代理服务器
 ```
 使用提示:
-	* 运行环境要求 python2.x + selenium + chrome + chrome driver + xvfb
-	* socks5代理网页均可适用
-	* 安装xvfb：pip install xvfbwrapper
-	* 开发环境配置参考: https://christopher.su/2015/selenium-chromedriver-ubuntu/
+    * 运行环境要求 python2.x + selenium + chrome + chrome driver + xvfb
+    * socks5代理网页均可适用
+    * 安装xvfb：pip install xvfbwrapper
+    * 开发环境配置参考: https://christopher.su/2015/selenium-chromedriver-ubuntu/
 ```
 
 ### python/selenium_phantomjs_sock5.py
 以`白名单`认证形式使用selenium库和PhantomJS驱动请求Socks代理服务器
 ```
 使用提示:
-	* 运行环境要求: python2.x
-	* socks5代理网页均可适用
-	* 使用此样例需要安装 selenium、PhantomJS
-	* PhantomJS 可以直接使用pip安装
+    * 运行环境要求: python2.x
+    * socks5代理网页均可适用
+    * 使用此样例需要安装 selenium、PhantomJS
+    * PhantomJS 可以直接使用pip安装
 ```
 
 ### python/selenium_phantomjs_sock5_auth.py
 以`用户名密码`认证形式使用selenium库和PhantomJS驱动请求Socks代理服务器
 ```
 使用提示:
-	* 运行环境要求 python2.x
-	* socks5代理http/https网页均可适用
-	* 使用此样例需要安装 selenium、PhantomJS
-	* PhantomJS 可以直接使用pip安装
+    * 运行环境要求 python2.x
+    * socks5代理http/https网页均可适用
+    * 使用此样例需要安装 selenium、PhantomJS
+    * PhantomJS 可以直接使用pip安装
 ```
 
 ## Socks代理-Python3部分:
@@ -155,17 +155,17 @@
 使用`requests`库请求Socks代理服务器, http/https网页均适用
 ```
 使用提示:
-	* http/https网页均可适用
-	* 运行环境要求：requests >= 2.10.0
-	* socks支持是requests的额外特性，需要安装才能使用: pip install requests[socks]
+    * http/https网页均可适用
+    * 运行环境要求：requests >= 2.10.0
+    * socks支持是requests的额外特性，需要安装才能使用: pip install requests[socks]
 ```
 
 ### python3/proxy_urllib.py
 使用`urllib`库请求Socks代理服务器, http/https网页均适用
 ```
 使用提示:
-	* http/https网页均可适用
-	* 请先安装socks: pip install pysocks
+    * http/https网页均可适用
+    * 请先安装socks: pip install pysocks
 ```
 
 
