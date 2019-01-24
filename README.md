@@ -1,4 +1,4 @@
-# 快代理官方帮助中心代码样例-Python部分
+# 快代理SDK - Python
 
 ### API部分:
 * python/api_urllib2.py: 使用urllib2调用api示例
