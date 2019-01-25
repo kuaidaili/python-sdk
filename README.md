@@ -27,6 +27,35 @@
 
 # 快代理SDK - Python
 
+* [调用API](#调用api)
+    * [python/api_urllib2.py](#pythonapi_urllib2py)
+    * [python/api_urllib.py](#pythonapi_urllibpy)
+    * [python/api_requests.py](#pythonapi_requestspy)
+* [Http代理-Python2部分:](#http代理-python2部分)
+    * [python/proxy_urllib2.py](#pythonproxy_urllib2py)
+    * [python/proxy_requests.py](#pythonproxy_requestspy)
+    * [python/selenium_chrome_http.py](#pythonselenium_chrome_httppy)
+    * [python/selenium_phantomjs_http.py](#pythonselenium_phantomjs_httppy)
+    * [python/selenium_phantomjs_http_auth.py](#pythonselenium_phantomjs_http_authpy)
+* [Http代理-Python3部分:](#http代理-python3部分)
+    * [python3/http_urllib.py](#python3http_urllibpy)        
+    * [python3/http_requests.py](#python3http_requestspy)    
+* [Http代理-Scrapy部分:](#http代理-scrapy部分)        
+    * [scrapy/scrapy_proxy/scrapy_proxy/middlewares.py](#scrapyscrapy_proxyscrapy_proxymiddlewarespy)                                       
+    * [scrapy/scrapy_proxy/scrapy_proxy/settings.py](#scrapyscrapy_proxyscrapy_proxysettingspy)                       
+    * [scrapy/scrapy_proxy/scrapy_proxy/spiders/main.py](#scrapyscrapy_proxyscrapy_proxyspidersmainpy)    
+* [Socks代理-Python2部分:](#socks代理-python2部分)        
+    * [python/socks_requests.py](#pythonsocks_requestspy)        
+    * [python/socks_urllib2.py](#pythonsocks_urllib2py)        
+    * [python/selenium_chrome_sock5.py](#pythonselenium_chrome_sock5py)        
+    * [python/selenium_phantomjs_sock5.py](#pythonselenium_phantomjs_sock5py)        
+    * [python/selenium_phantomjs_sock5_auth.py](#pythonselenium_phantomjs_sock5_authpy)    
+* [Socks代理-Python3部分:](#socks代理-python3部分)        
+    * [python3/proxy_requests_socks.py](#python3proxy_requests_sockspy)        
+    * [python3/proxy_urllib.py](#python3proxy_urllibpy)    
+* [技术支持](#技术支持)
+
+
 ## 调用API
 
 ### python/api_urllib2.py
