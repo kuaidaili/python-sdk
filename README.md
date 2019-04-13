@@ -139,6 +139,9 @@
 ```
 
 ## Http代理-Scrapy部分:
+scrapy项目标准目录结构如下：
+
+![scrapy项目结构](https://help.kuaidaili.com/dev/img/scrapy.jpg)
 
 ### scrapy/scrapy_proxy/scrapy_proxy/middlewares.py
 设置代理
