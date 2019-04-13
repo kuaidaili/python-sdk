@@ -1,0 +1,20 @@
+# -*- coding: utf-8 -*-
+from functools import wraps
+
+
+def hmac_required(func):
+    @wraps(func)
+    def wrapper(self, *args, **kwargs):
+        if not self.auth.apiKey:
+            raise NameError("sign_type should be hmacsha1, so the apiKey is required")
+        return func(self, *args, **kwargs)
+
+    return wrapper
+
+
+class OpsOrderLevel(object):
+    """开放代理订单级别"""
+    NORMAL = "dev"  # 普通
+    VIP = "dev"  # vip
+    SVIP = "svip"  # svip
+    PRO = "ent"  # 专业版
