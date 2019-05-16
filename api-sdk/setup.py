@@ -4,13 +4,13 @@ from setuptools import setup
 
 setup(
     name='kdl',
-    version='0.0.1',
+    version='0.1.8',
     description=(
         'kuaidaili sdk for api, site: https://www.kuaidaili.com'
     ),
     long_description=open('README.rst').read(),
-    author='<kuaidaili-dev>',
-    author_email='<service@kuaidaili.com>',
+    author='kuaidaili-dev',
+    author_email='service@kuaidaili.com',
     license='BSD License',
     packages= [
         'kdl',
@@ -19,7 +19,7 @@ setup(
     install_requires=[
         'requests'
     ],
-    url='<https://github.com/kuaidaili-dev>',
+    url='https://github.com/kuaidaili/python-sdk/api-sdk',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Operating System :: OS Independent',

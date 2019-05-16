@@ -8,6 +8,8 @@ class KdlException(Exception):
 
     def __init__(self, code=None, message=None):
         self.code = code
+        if sys.version_info[0] < 3 and isinstance(message, unicode):
+            message = message.encode("utf8")
         self.message = message
         self._hint_message = "[KdlException] code: {} message: {}".format(self.code, self.message)
 
@@ -21,9 +23,8 @@ class KdlException(Exception):
 
     def __str__(self):
         if sys.version_info[0] < 3 and isinstance(self.hint_message, unicode):
-            return self.hint_message.encode("utf8")
-        else:
-            return self.hint_message
+            self.hint_message = self.hint_message.encode("utf8")
+        return self.hint_message
 
 
 class KdlStatusError(KdlException):

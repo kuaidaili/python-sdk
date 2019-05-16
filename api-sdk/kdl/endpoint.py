@@ -15,4 +15,5 @@ class EndPoint(Enum):
     GetOpsProxySvip = "svip.kdlapi.com/api/getproxy"
     GetOpsProxyEnt = "ent.kdlapi.com/api/getproxy"
     CheckDpsValid = "dps.kdlapi.com/api/checkdpsvalid"
+    CheckOpsValid = "dev.kdlapi.com/api/checkopsvalid"
     GetIpBalance = "dps.kdlapi.com/api/getipbalance"

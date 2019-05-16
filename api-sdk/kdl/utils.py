@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 from functools import wraps
 
+from kdl.exceptions import KdlNameError
 
-def hmac_required(func):
+
+def signature_required(func):
     @wraps(func)
     def wrapper(self, *args, **kwargs):
         if not self.auth.apiKey:
-            raise NameError("sign_type should be hmacsha1, so the apiKey is required")
+            raise KdlNameError("apiKey is required for signature")
         return func(self, *args, **kwargs)
-
     return wrapper
 
 

@@ -14,13 +14,16 @@ class Auth:
     @classmethod
     def get_string_to_sign(cls, method, endpoint, params):
         """ 生成签名原文字符串 """
-        s = method + endpoint + '?'
+        s = method + endpoint.split('.com')[1] + '?'
         query_str = '&'.join("%s=%s" % (k, params[k]) for k in sorted(params))
         return s + query_str
 
     def sign_str(self, raw_str, method=hashlib.sha1):
         """ 生成签名串 """
-        hmac_str = hmac.new(self.apiKey.encode('utf8'), raw_str.encode('utf8'), method).digest()
+        try:
+            hmac_str = hmac.new(self.apiKey.encode('utf8'), raw_str.encode('utf8'), method).digest()
+        except UnicodeDecodeError as e:
+            hmac_str = hmac.new(self.apiKey.encode('utf8'), raw_str, method).digest()
         return base64.b64encode(hmac_str)
 
     @property
