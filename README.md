@@ -1,4 +1,8 @@
-# 快代理SDK - Python
+# 快代理API SDK - Python
+[详情](https://github.com/kuaidaili/python-sdk/tree/master/api-sdk)
+
+
+# 快代理官方代码样例 - Python
 
 * [调用API](#调用api)
     * [python/api_urllib2.py](#pythonapi_urllib2py)
