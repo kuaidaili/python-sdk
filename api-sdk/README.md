@@ -14,7 +14,9 @@
 
 通过pip方式安装请在命令行中执行以下命令:
 
-`pip install kdl`
+```
+pip install kdl
+```
 
 ## 通过源码包安装
 前往 [Github 代码托管地址](https://github.com/kuaidaili/python-sdk/tree/master/api-sdk) 下载最新代码，解压后
