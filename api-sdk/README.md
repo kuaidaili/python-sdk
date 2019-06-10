@@ -3,13 +3,13 @@
 
 # 依赖环境
 1. python2.7 到 python3.7
-2. 从快代理购买相应产品
-3. 获取订单的orderId 和 apiKey
+2. 从[快代理](https://www.kuaidaili.com)购买相应产品
+3. [获取订单的`orderId`和`apiKey`](https://www.kuaidaili.com/usercenter/api/settings/)
 
 # 获取安装
 安装 Python SDK 前，请先获取订单对应的订单号和apiKey。 订单号是用于标识订单，apiKey 是用于加密签名字符串和服务器端验证签名字符串的密钥。apiKey 必须严格保管，避免泄露。
 
-## 通过Pip安装(推荐)
+## 通过pip安装(推荐)
 您可以通过 pip 安装方式将SDK 安装到您的项目中，如果您的项目环境尚未安装 pip，请详细参见 [pip](https://pip.pypa.io/en/stable/installing/?spm=a3c0i.o32026zh.a3.6.74134958lLSo6o) 官网 安装。
 
 通过pip方式安装请在命令行中执行以下命令:
