@@ -33,10 +33,10 @@ $ python setup.py install
 
 """
     私密代理使用示例
-    方法的默认鉴权方式请参考帮助中心api文档: "https://help.kuaidaili.com/api/intro/"
-    所有方法均可添加关键字参数sign_type修改鉴权方式, 目前有 "simple" 和 "hmacsha1" 两种
-    若需要使用鉴权，则auth对象必须将订单号对应的api key作为第二个参数传入构造函数中，否则只能调用
-    不需要鉴权的api，比如提取代理的api
+    
+    接口鉴权说明：
+    目前支持的鉴权方式有 "simple" 和 "hmacsha1" 两种，默认使用 "simple"鉴权。
+    所有方法均可添加关键字参数sign_type修改鉴权方式。
 """
 
 import kdl
@@ -79,3 +79,8 @@ balance = client.get_ip_balance(sign_type='hmacsha1')
 print("balance: ", balance)
 ```
 您可以在examples目录下找到更详细的示例
+
+## 参考资料
+
+* [查看API列表](https://help.kuaidaili.com/api/intro/)
+* [了解API鉴权](https://help.kuaidaili.com/api/auth/)
