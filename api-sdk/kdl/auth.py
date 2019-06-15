@@ -7,7 +7,7 @@ import hmac
 class Auth:
     """用于保存用户orderid、apiKey，以及计算签名的对象。"""
 
-    def __init__(self, orderId, apiKey=None):
+    def __init__(self, orderId, apiKey):
         self._orderId = orderId
         self._apiKey = apiKey
 

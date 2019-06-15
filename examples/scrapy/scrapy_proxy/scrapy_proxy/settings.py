@@ -17,9 +17,10 @@ NEWSPIDER_MODULE = 'scrapy_proxy.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'scrapy_proxy (+http://www.yourdomain.com)'
+# USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:39.0) Gecko/20100101 Firefox/39.0'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -53,7 +54,10 @@ ROBOTSTXT_OBEY = True
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-   'scrapy_proxy.middlewares.ProxyMiddleware': 543,
+   'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
+   'scrapy_proxy.middlewares.ProxyMiddleware': 100,
+   'scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware': 2,
+   'scrapy_proxy.middlewares.AgentMiddleware': 1,
 }
 
 # Enable or disable extensions

@@ -5,14 +5,13 @@ import requests
 
 from kdl.endpoint import EndPoint
 from kdl.exceptions import KdlException, KdlNameError, KdlTypeError, KdlStatusError
-from kdl.utils import signature_required, OpsOrderLevel
+from kdl.utils import OpsOrderLevel
 
 
 class Client:
     def __init__(self, auth):
         self.auth = auth
 
-    @signature_required
     def get_order_expire_time(self, sign_type="simple"):
         """ 获取订单到期时间, 强制签名验证
             :return 订单过期时间字符串
@@ -24,7 +23,6 @@ class Client:
             return res['data']['expire_time']
         return res
 
-    @signature_required
     def get_ip_whitelist(self, sign_type="simple"):
         """ 获取订单的ip白名单, 强制签名验证
             :return ip白名单列表
@@ -36,7 +34,6 @@ class Client:
             return res['data']['ipwhitelist']
         return res
 
-    @signature_required
     def set_ip_whitelist(self, iplist=None, sign_type="simple"):
         """ 设置订单的ip白名单, 强制签名验证
             :param iplist参数类型为 str 或 list 或 tuple
@@ -54,9 +51,9 @@ class Client:
         self._get_base_res("POST", endpoint, params)
         return True
 
-    def get_dps(self, num=None, **kwargs):
+    def get_dps(self, num=None, sign_type="simple", **kwargs):
         """
-            获取私密代理, 默认不需要鉴权
+            获取私密代理, 默认"simple"鉴权
             :param num: 提取数量, int类型
             :param kwargs: 其他关键字参数，具体有那些参数请查看帮助中心api说明
             :return 若为json格式, 则返回data中proxy_list部分, 即proxy列表, 否则原样返回
@@ -66,17 +63,16 @@ class Client:
         if not isinstance(num, int):
             KdlTypeError("num should be a integer")
         endpoint = EndPoint.GetDpsProxy.value
-        params = self._get_params(endpoint, num=num, **kwargs)
+        params = self._get_params(endpoint, num=num, sign_type=sign_type, **kwargs)
         res = self._get_base_res("GET", endpoint, params)
         if isinstance(res, dict):
             return res['data']['proxy_list']
         return res
 
-    @signature_required
     def check_dps_valid(self, proxy=None, sign_type="simple", **kwargs):
         """
             检测私密代理有效性, 强制签名验证
-            :return 返回data部分, 格式为由'proxy: True/False'组成的列表
+            :return 返回data部分, 格式为由'proxy: True/False'组成的dict
         """
         if not proxy:
             raise KdlNameError("miss param: proxy")
@@ -92,7 +88,6 @@ class Client:
             return res['data']
         return res
 
-    @signature_required
     def get_ip_balance(self, sign_type="simple"):
         """
             获取计数版订单ip余额, 强制签名验证
@@ -105,8 +100,8 @@ class Client:
             return res['data']['balance']
         return res
 
-    def get_kps(self, num=None, **kwargs):
-        """ 获取独享代理, 默认不需要鉴权
+    def get_kps(self, num=None, sign_type="simple", **kwargs):
+        """ 获取独享代理, 默认"simple"鉴权
             :param num: 提取数量, sign_type: 鉴权方式
             :param kwargs: 其他关键字参数，具体有那些参数请查看帮助中心api说明
             :return 若为json格式, 则返回data中proxy_list部分, 即proxy列表, 否则原样返回
@@ -116,13 +111,13 @@ class Client:
         if not isinstance(num, int):
             KdlTypeError("num should be a integer")
         endpoint = EndPoint.GetKpsProxy.value
-        params = self._get_params(endpoint, num=num, **kwargs)
+        params = self._get_params(endpoint, num=num, sign_type=sign_type, **kwargs)
         res = self._get_base_res("GET", endpoint, params)
         if isinstance(res, dict):
             return res['data']['proxy_list']
         return res
 
-    def get_proxy(self, num=None, order_level=OpsOrderLevel.NORMAL, **kwargs):
+    def get_proxy(self, num=None, order_level=OpsOrderLevel.NORMAL, sign_type="simple", **kwargs):
         """ 获取开放代理, 默认不需要鉴权
             :param num: 提取数量, sign_type: 鉴权方式, order_level: 开放代理订单类型
             :param kwargs: 其他关键字参数，具体有那些参数请查看帮助中心api说明
@@ -137,13 +132,12 @@ class Client:
             endpoint = EndPoint.GetOpsProxySvip.value
         if order_level == OpsOrderLevel.PRO:
             endpoint = EndPoint.GetOpsProxyEnt.value
-        params = self._get_params(endpoint, num=num, **kwargs)
+        params = self._get_params(endpoint, num=num, sign_type=sign_type, **kwargs)
         res = self._get_base_res("GET", endpoint, params)
         if isinstance(res, dict):
             return res['data']['proxy_list']
         return res
 
-    @signature_required
     def check_ops_valid(self, proxy=None, sign_type="simple", **kwargs):
         """
             检测开放代理有效性, 强制签名验证
@@ -172,7 +166,7 @@ class Client:
             return params
 
         if not self.auth.apiKey:
-            raise KdlNameError(-4, "api key is required for signature")
+            raise KdlNameError("api key is required for signature")
 
         if sign_type == "simple":
             params['signature'] = self.auth.apiKey

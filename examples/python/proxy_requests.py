@@ -36,3 +36,9 @@ print r.status_code #获取Reponse的返回码
 if r.status_code == 200:
     r.enconding = "utf-8" #设置返回内容的编码
     print r.content #获取页面内容
+
+
+
+# proxy = {'address': '42.51.12.203:16816',
+#          'username': 'k_1043',
+#          'password': '3k0xg183'}

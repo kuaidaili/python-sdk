@@ -4,11 +4,11 @@ from setuptools import setup
 
 setup(
     name='kdl',
-    version='0.1.8',
+    version='0.2.1',
     description=(
-        'kuaidaili sdk for api, site: https://www.kuaidaili.com'
+        'kuaidaili api sdk python, site: https://www.kuaidaili.com'
     ),
-    long_description=open('README.rst').read(),
+    long_description=open('README.rst').read().decode('utf-8'),
     author='kuaidaili-dev',
     author_email='service@kuaidaili.com',
     license='BSD License',

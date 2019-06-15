@@ -2,15 +2,14 @@
 
 """
     独享代理使用示例
-    方法的默认鉴权方式请参考帮助中心api文档: "https://help.kuaidaili.com/api/intro/"
-    所有方法均可添加关键字参数sign_type修改鉴权方式, 目前有 "simple" 和 "hmacsha1" 两种
-    若需要使用鉴权，则auth对象必须将订单号对应的api key作为第二个参数传入构造函数中，否则只能调用
-    不需要鉴权的api，比如提取代理的api
+    接口鉴权说明：
+    目前支持的鉴权方式有 "simple" 和 "hmacsha1" 两种，默认使用 "simple"鉴权。
+    所有方法均可添加关键字参数sign_type修改鉴权方式。
 """
 
 import kdl
 
-auth = kdl.Auth("yourorderid", "yourorderapikey")
+auth = kdl.Auth("yourorderid", "yourapikey")
 client = kdl.Client(auth)
 
 # 获取订单到期时间, 返回时间字符串
