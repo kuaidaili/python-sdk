@@ -1,5 +1,5 @@
 # 快代理API SDK - Python
-[详情](https://github.com/kuaidaili/python-sdk/tree/master/api-sdk)
+通过SDK可快速调用API接口，[查看详情](https://github.com/kuaidaili/python-sdk/tree/master/api-sdk)
 
 
 # 快代理官方代码样例 - Python
