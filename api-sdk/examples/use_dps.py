@@ -41,6 +41,11 @@ ips = client.get_dps(2, sign_type='simple', format='json')
 valids = client.check_dps_valid(ips)
 print("valids: ", valids)
 
+# 获取私密代理剩余时间: 返回 ip: seconds(剩余秒数) 组成的dict
+ips = client.get_dps(5, format='json')
+seconds = client.get_dps_valid_time(ips)
+print("seconds: ", seconds)
+
 
 # 获取计数版ip余额（仅私密代理计数版）
 balance = client.get_ip_balance(sign_type='hmacsha1')
