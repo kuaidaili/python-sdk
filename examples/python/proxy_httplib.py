@@ -3,6 +3,7 @@
 
 
 import httplib
+import base64
 
 #要访问的目标网页
 page_url = "http://dev.kuaidaili.com/testproxy"
@@ -15,7 +16,7 @@ username = "myusername"
 password = "mypassword"
 
 headers = {
-    "Proxy-Authorization": "Basic a3BzbW9uaXRvcjprZGxtMjAxNg==",
+    "Proxy-Authorization": "Basic %s" % base64.b64encode('%s:%s' % (username, password)),
     "User-Agent": "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50",
     "Connection": "close",
 }
