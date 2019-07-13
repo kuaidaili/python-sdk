@@ -58,13 +58,13 @@
 ## Http代理-Python2部分:
 
 ### python/proxy_urllib2.py
-使用urllib2请求Http代理服务器, 支持访问http和https网页, 推荐使用
+使用urllib2请求Http代理服务器, 支持访问http和https网页
 ```
 使用提示: 运行环境要求 python2.6/2.7
 ```
 
 ### python/proxy_requests.py
-使用requests请求Http代理如武器, 支持使用白名单访问http和https网页, 使用用户名密码不支持访问https网页
+使用requests请求Http代理服务器, 支持访问http和https网页, 推荐使用
 ```
 使用提示: requests不是python原生库, 需要安装才能使用: pip install requests
 ```
@@ -103,15 +103,15 @@
 使用`urllib`库请求Http代理服务器, 支持访问http和https网页
 ```
 使用提示:
-    * 基于urllib的代码样例同时支持访问http和https网页，推荐使用
+    * 基于urllib的代码样例同时支持访问http和https网页
     * 运行环境要求 python3.x
 ```
 
 ### python3/http_requests.py
-使用`requests`库请求Http代理服务器, 支持使用白名单访问http,https网页, 使用用户名密码不支持访问https网页
+使用requests请求Http代理服务器, 支持访问http和https网页, 推荐使用
 ```
 使用提示:
-    * 基于requests的代码样例支持使用白名单访问http,https网页，使用用户名密码不支持访问https网页
+    * 基于requests的代码样例支持访问http,https网页，推荐使用
     * requests不是python原生库，需要安装才能使用: pip install requests
 ```
 
