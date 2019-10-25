@@ -6,10 +6,11 @@
     目前支持的鉴权方式有 "simple" 和 "hmacsha1" 两种，默认使用 "simple"鉴权。
     所有方法均可添加关键字参数sign_type修改鉴权方式。
 """
-
+import sys
+sys.path.append("/mnt/hgfs/PycharmProjects/python-sdk-master/api-sdk")
 import kdl
 
-auth = kdl.Auth("yourorderid", "yourapikey")
+auth = kdl.Auth("947179293200479", "pzrhjo98k6l7bfcuvjoy9wt50adfgt5l")
 client = kdl.Client(auth)
 
 # 获取订单到期时间, 返回时间字符串
@@ -23,11 +24,12 @@ print("expire time", expire_time)
 # 注意：若您使用的是python2, 且在终端调用，或在文件中调用且没有加 "# -*- coding: utf-8 -*-" 的话
 # 传入area参数时，请传入unicode类型，如 area=u'北京,上海'
 # 若您是开放代理svip订单，请传入order_level='svip', 若您是开放代理专业版订单，请传入order_level='ent'
-ips = client.get_proxy(2, sign_type='hmacsha1', order_level='svip', format='json', pt=2, area='北京,上海,广东')
+ips = client.get_proxy(4, sign_type='simple', order_level='svip', format='json', pt=2, area='北京,上海,广东')
 print("ops proxy: ", ips)
 
 
+
 # 检测开放代理有效性
-ips = client.get_proxy(2, sign_type='hmacsha1', order_level='svip', format='json', pt=2, area='北京,上海,广东')
+ips = client.get_proxy(4, sign_type='simple', order_level='svip', format='json', pt=2, area='北京,上海,广东')
 valids = client.check_ops_valid(ips)
 print("valids: ", valids)

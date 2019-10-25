@@ -9,12 +9,14 @@
 
 import kdl
 
-auth = kdl.Auth("yourorderid", "yourapikey")
+auth = kdl.Auth("977173347636224", "s3mqfikvbo4sw9i9v40vjq6o6gvr5wkw")
 client = kdl.Client(auth)
 
 # 获取订单到期时间, 返回时间字符串
 expire_time = client.get_order_expire_time()
 print("expire time", expire_time)
+
+
 
 # 获取ip白名单, 返回ip列表
 ip_whitelist = client.get_ip_whitelist()
@@ -23,8 +25,11 @@ print("ip whitelist", ip_whitelist)
 # 设置ip白名单，参数类型为字符串或列表或元组
 # 成功则返回True, 否则抛出异常
 client.set_ip_whitelist([])
-client.set_ip_whitelist("127.0.0.1, 192.168.0.139")
+client.set_ip_whitelist("171.113.244.40,171.113.244.41")
 print(client.get_ip_whitelist())
+
+
+
 client.set_ip_whitelist(tuple())
 
 # 提取私密代理ip, 第一个参数为提取的数量, 其他参数以关键字参数的形式传入(不需要传入signature和timestamp)

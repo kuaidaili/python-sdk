@@ -7,8 +7,8 @@ from enum import Enum, unique
 class EndPoint(Enum):
     """ 各个api的主机+路径 """
     GetOrderExpireTime = "dev.kdlapi.com/api/getorderexpiretime"
-    GetIpWhitelist = "dev.kdlapi.com/api/getipwhitelist"
-    SetIpWhitelist = "dev.kdlapi.com/api/setipwhitelist"
+    GetIpWhitelist = "dev.kdlapi.com/api/getipwhitelist" # 获取IP白名单
+    SetIpWhitelist = "dev.kdlapi.com/api/setipwhitelist" # 设置IP白名单
     GetKpsProxy = "kps.kdlapi.com/api/getkps"
     GetDpsProxy = "dps.kdlapi.com/api/getdps"
     GetOpsProxyNormalOrVip = "dev.kdlapi.com/api/getproxy"
@@ -17,3 +17,7 @@ class EndPoint(Enum):
     CheckDpsValid = "dps.kdlapi.com/api/checkdpsvalid"
     CheckOpsValid = "dev.kdlapi.com/api/checkopsvalid"
     GetIpBalance = "dps.kdlapi.com/api/getipbalance"
+    TpsCurrentIp = "tps.kdlapi.com/api/tpscurrentip" # 获取当前隧道代理IP
+    ChangeTpsIp = "tps.kdlapi.com/api/changetpsip" # 更改当前隧道代理IP
+
+

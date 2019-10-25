@@ -16,9 +16,11 @@ class Client:
         """ 获取订单到期时间, 强制签名验证
             :return 订单过期时间字符串
         """
+
         endpoint = EndPoint.GetOrderExpireTime.value
         params = self._get_params(endpoint, sign_type=sign_type)
         res = self._get_base_res("GET", endpoint, params)
+
         if isinstance(res, dict):
             return res['data']['expire_time']
         return res
@@ -34,12 +36,14 @@ class Client:
             return res['data']['ipwhitelist']
         return res
 
+
     def set_ip_whitelist(self, iplist=None, sign_type="simple"):
         """ 设置订单的ip白名单, 强制签名验证
             :param iplist参数类型为 str 或 list 或 tuple
                    如果为字符串则ip之间用逗号隔开
             :return 成功则返回True, 否则抛出异常
         """
+
         if iplist is None:
             raise KdlNameError("miss param: iplist")
         if not (isinstance(iplist, list) or isinstance(iplist, tuple) or isinstance(iplist, str)):
@@ -50,6 +54,32 @@ class Client:
         params = self._get_params(endpoint, iplist=iplist, sign_type=sign_type)
         self._get_base_res("POST", endpoint, params)
         return True
+
+    def tps_current_ip(self, sign_type="simple"):
+        """
+        仅支持支持换IP周期>=1分钟的隧道代理订单
+
+        获取隧道当前的IP，默认“simple”鉴权
+        :param sign_type:默认simple
+        :return:返回ip地址。
+        """
+        endpoint = EndPoint.TpsCurrentIp.value
+        params = self._get_params(endpoint,sign_type=sign_type)
+        res = self._get_base_res("GET",endpoint,params)
+        return res['data']['current_ip']
+
+
+    def change_tps_ip(self, sign_type="simple"):
+        """
+         仅支持支持换IP周期>=1分钟的隧道代理订单
+        :param sign_type: 默认simple
+        :return: 返回新的IP地址
+        """
+        endpoint = EndPoint.ChangeTpsIp.value
+        params = self._get_params(endpoint,sign_type=sign_type)
+        res = self._get_base_res("GET",endpoint,params)
+        return res['data']['new_ip']
+
 
     def get_dps(self, num=None, sign_type="simple", **kwargs):
         """
@@ -90,7 +120,8 @@ class Client:
 
     def get_ip_balance(self, sign_type="simple"):
         """
-            获取计数版订单ip余额, 强制签名验证
+            获取计数版订单ip余额, 强制签名验证,
+            此接口只对按量付费订单和包年包月的集中提取型订单有效
             :return 返回data中的balance字段, int类型
         """
         endpoint = EndPoint.GetIpBalance.value
@@ -132,6 +163,7 @@ class Client:
             endpoint = EndPoint.GetOpsProxySvip.value
         if order_level == OpsOrderLevel.PRO:
             endpoint = EndPoint.GetOpsProxyEnt.value
+
         params = self._get_params(endpoint, num=num, sign_type=sign_type, **kwargs)
         res = self._get_base_res("GET", endpoint, params)
         if isinstance(res, dict):
@@ -170,6 +202,7 @@ class Client:
 
         if sign_type == "simple":
             params['signature'] = self.auth.apiKey
+
         elif sign_type == "hmacsha1":
             params['timestamp'] = int(time.time())
             if endpoint == EndPoint.SetIpWhitelist.value:
@@ -186,21 +219,23 @@ class Client:
         """ 处理基础请求,
             若响应为json格式则返回请求结果dict
             否则直接返回原格式 """
+
         try:
             r = None
             if method == "GET":
                 r = requests.get("https://" + endpoint, params=params)
             elif method == "POST":
                 r = requests.post("https://" + endpoint, data=params)
-            if r.status_code != 200:
-                raise KdlStatusError(r.status_code, r.content.decode('utf8'))
 
+            if r.status_code != 200:
+                raise KdlStatusErrorR(r.status_code, r.content.decode('utf8'))
             try:
                 res = json.loads(r.content.decode('utf8'))
                 code, msg = res['code'], res['msg']
                 if code != 0:
                     raise KdlException(code, msg)
                 return res
+
             except ValueError as e:
                 # 返回结果不是json格式, 直接返回
                 if r.content.decode('utf8').strip().startswith("ERROR"):
