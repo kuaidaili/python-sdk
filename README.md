@@ -1,24 +1,20 @@
-# 快代理API SDK - Python
-通过SDK可快速调用API接口，[查看详情](https://github.com/kuaidaili/python-sdk/tree/master/api-sdk)
-
-
-# 快代理官方代码样例 - Python
+# 快代理SDK - Python
 
 * [调用API](#调用api)
     * [python/api_urllib2.py](#pythonapi_urllib2py)
     * [python/api_urllib.py](#pythonapi_urllibpy)
     * [python/api_requests.py](#pythonapi_requestspy)
 * [Http代理-Python2部分:](#http代理-python2部分)
-    * [python/proxy_requests.py](#pythonproxy_requestspy)
     * [python/proxy_urllib2.py](#pythonproxy_urllib2py)
+    * [python/proxy_requests.py](#pythonproxy_requestspy)
     * [python/selenium_chrome_http.py](#pythonselenium_chrome_httppy)
     * [python/selenium_phantomjs_http.py](#pythonselenium_phantomjs_httppy)
     * [python/selenium_phantomjs_http_auth.py](#pythonselenium_phantomjs_http_authpy)
 * [Http代理-Python3部分:](#http代理-python3部分)
-    * [python3/http_requests.py](#python3http_requestspy)    
     * [python3/http_urllib.py](#python3http_urllibpy)        
+    * [python3/http_requests.py](#python3http_requestspy)    
 * [Http代理-Scrapy部分:](#http代理-scrapy部分)        
-    * [scrapy/scrapy_proxy/scrapy_proxy/middlewares.py](#scrapyscrapy_proxyscrapy_proxymiddlewarespy)   
+    * [scrapy/scrapy_proxy/scrapy_proxy/middlewares.py](#scrapyscrapy_proxyscrapy_proxymiddlewarespy)                                       
     * [scrapy/scrapy_proxy/scrapy_proxy/settings.py](#scrapyscrapy_proxyscrapy_proxysettingspy)                       
     * [scrapy/scrapy_proxy/scrapy_proxy/spiders/main.py](#scrapyscrapy_proxyscrapy_proxyspidersmainpy)    
 * [Socks代理-Python2部分:](#socks代理-python2部分)        
@@ -30,6 +26,17 @@
 * [Socks代理-Python3部分:](#socks代理-python3部分)        
     * [python3/proxy_requests_socks.py](#python3proxy_requests_sockspy)        
     * [python3/proxy_urllib.py](#python3proxy_urllibpy)    
+* [隧道代理-Python2部分:](#隧道代理-Python2部分) 
+    * [python/tps_proxy_urllib2.py](#python/tps_proxy_urllib2.py)
+    * [python/tps_proxy_request.py](#python/tps_proxy_request.py)
+* [隧道代理-python3部分](#隧道代理-python3部分)
+    * [python3/tps_proxy_request.py](#python3/tps_proxy_request.py)
+    * [python3/tps_proxy_urllib.py](#python3/tps_proxy_urllib.py)
+* [隧道代理-Scrapy部分](#隧道代理-Scrapy部分)
+    * [scrapy_proxy/scrapy_proxy/middlewares.py](#scrapy_proxy/scrapy_proxy/middlewares.py)                                       
+    * [scrapy_proxy/scrapy_proxy/settings.py](#scrapy_proxy/scrapy_proxy/settings.py)                       
+    * [scrapy_proxy/scrapy_proxy/spiders/main.py](#scrapy_proxy/scrapy_proxy/spiders/main.py)  
+
 * [技术支持](#技术支持)
 
 
@@ -57,17 +64,16 @@
 
 ## Http代理-Python2部分:
 
-
-### python/proxy_requests.py
-使用requests请求Http代理服务器, 支持访问http和https网页, 推荐使用
-```
-使用提示: requests不是python原生库, 需要安装才能使用: pip install requests
-```
-
 ### python/proxy_urllib2.py
-使用urllib2请求Http代理服务器, 支持访问http和https网页
+使用urllib2请求Http代理服务器, 支持访问http和https网页, 推荐使用
 ```
 使用提示: 运行环境要求 python2.6/2.7
+```
+
+### python/proxy_requests.py
+使用requests请求Http代理服务器, 支持使用白名单访问http和https网页, 使用用户名密码不支持访问https网页
+```
+使用提示: requests不是python原生库, 需要安装才能使用: pip install requests
 ```
 
 ### python/selenium_chrome_http.py
@@ -100,20 +106,20 @@
 
 ## Http代理-Python3部分:
 
-### python3/http_requests.py
-使用requests请求Http代理服务器, 支持访问http和https网页, 推荐使用
-```
-使用提示:
-    * 基于requests的代码样例支持访问http,https网页，推荐使用
-    * requests不是python原生库，需要安装才能使用: pip install requests
-```
-
 ### python3/http_urllib.py
 使用`urllib`库请求Http代理服务器, 支持访问http和https网页
 ```
 使用提示:
-    * 基于urllib的代码样例同时支持访问http和https网页
+    * 基于urllib的代码样例同时支持访问http和https网页，推荐使用
     * 运行环境要求 python3.x
+```
+
+### python3/http_requests.py
+使用`requests`库请求Http代理服务器, 支持使用白名单访问http,https网页, 使用用户名密码不支持访问https网页
+```
+使用提示:
+    * 基于requests的代码样例支持使用白名单访问http,https网页，使用用户名密码不支持访问https网页
+    * requests不是python原生库，需要安装才能使用: pip install requests
 ```
 
 ## Http代理-Scrapy部分:
@@ -205,6 +211,59 @@ scrapy项目标准目录结构如下：
     * 请先安装socks: pip install pysocks
 ```
 
+## 隧道代理-Python2部分
+### python/tps_proxy_urllib2.py
+使用urllib2请求隧道代理服务器, 支持访问http和https网页, 推荐使用
+```
+使用提示: 运行环境要求 python2.6/2.7
+```
+
+### python/tps_proxy_request.py
+使用requests请求隧道代理服务器, 支持访问http和https网页。推荐使用
+```
+使用提示:
+    * 基于requests的代码样例支持支持访问http和https网页。推荐使用
+    * requests不是python原生库，需要安装才能使用: pip install requests
+```
+
+## 隧道代理-python3部分
+### python3/tps_proxy_request.py
+使用requests请求隧道代理服务器, 支持访问http和https网页。推荐使用
+```
+使用提示:
+    * 基于requests的代码样例支持支持访问http和https网页。推荐使用
+    *
+```
+
+### python3/tps_proxy_urllib.py
+使用urllib2请求隧道代理服务器, 支持访问http和https网页, 推荐使用
+```
+使用提示: 运行环境要求 python3
+```
+
+## 隧道代理-Scrapy部分:
+scrapy项目标准目录结构如下：
+
+![scrapy项目结构](https://help.kuaidaili.com/dev/img/scrapy.jpg)
+
+### scrapy_proxy/scrapy_proxy/middlewares.py
+设置代理
+
+### scrapy_proxy/scrapy_proxy/settings.py
+使代理生效
+
+### scrapy_proxy/scrapy_proxy/spiders/main.py
+使用代理
+
+```
+使用提示:
+    * http/https网页均可适用
+    * scrapy不是python原生库，需要安装才能使用: pip install scrapy
+    * 在第一级scrapy_proxy目录下运行如下命令查看结果：scrapy crawl main
+```
+    
+
+    
 
 ## 技术支持
 

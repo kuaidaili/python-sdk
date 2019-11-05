@@ -26,6 +26,17 @@
 * [Socks代理-Python3部分:](#socks代理-python3部分)        
     * [python3/proxy_requests_socks.py](#python3proxy_requests_sockspy)        
     * [python3/proxy_urllib.py](#python3proxy_urllibpy)    
+* [隧道代理-Python2部分:](#隧道代理-Python2部分) 
+    * [python/tps_proxy_urllib2.py](#python/tps_proxy_urllib2.py)
+    * [python/tps_proxy_request.py](#python/tps_proxy_request.py)
+* [隧道代理-python3部分](#隧道代理-python3部分)
+    * [python3/tps_proxy_request.py](#python3/tps_proxy_request.py)
+    * [python3/tps_proxy_urllib.py](#python3/tps_proxy_urllib.py)
+* [隧道代理-Scrapy部分](#隧道代理-Scrapy部分)
+    * [scrapy_proxy/scrapy_proxy/middlewares.py](#scrapy_proxy/scrapy_proxy/middlewares.py)                                       
+    * [scrapy_proxy/scrapy_proxy/settings.py](#scrapy_proxy/scrapy_proxy/settings.py)                       
+    * [scrapy_proxy/scrapy_proxy/spiders/main.py](#scrapy_proxy/scrapy_proxy/spiders/main.py)  
+
 * [技术支持](#技术支持)
 
 
@@ -60,7 +71,7 @@
 ```
 
 ### python/proxy_requests.py
-使用requests请求Http代理如武器, 支持使用白名单访问http和https网页, 使用用户名密码不支持访问https网页
+使用requests请求Http代理服务器, 支持使用白名单访问http和https网页, 使用用户名密码不支持访问https网页
 ```
 使用提示: requests不是python原生库, 需要安装才能使用: pip install requests
 ```
@@ -200,6 +211,59 @@ scrapy项目标准目录结构如下：
     * 请先安装socks: pip install pysocks
 ```
 
+## 隧道代理-Python2部分
+### python/tps_proxy_urllib2.py
+使用urllib2请求隧道代理服务器, 支持访问http和https网页, 推荐使用
+```
+使用提示: 运行环境要求 python2.6/2.7
+```
+
+### python/tps_proxy_request.py
+使用requests请求隧道代理服务器, 支持访问http和https网页。推荐使用
+```
+使用提示:
+    * 基于requests的代码样例支持支持访问http和https网页。推荐使用
+    * requests不是python原生库，需要安装才能使用: pip install requests
+```
+
+## 隧道代理-python3部分
+### python3/tps_proxy_request.py
+使用requests请求隧道代理服务器, 支持访问http和https网页。推荐使用
+```
+使用提示:
+    * 基于requests的代码样例支持支持访问http和https网页。推荐使用
+    *
+```
+
+### python3/tps_proxy_urllib.py
+使用urllib2请求隧道代理服务器, 支持访问http和https网页, 推荐使用
+```
+使用提示: 运行环境要求 python3
+```
+
+## 隧道代理-Scrapy部分:
+scrapy项目标准目录结构如下：
+
+![scrapy项目结构](https://help.kuaidaili.com/dev/img/scrapy.jpg)
+
+### scrapy_proxy/scrapy_proxy/middlewares.py
+设置代理
+
+### scrapy_proxy/scrapy_proxy/settings.py
+使代理生效
+
+### scrapy_proxy/scrapy_proxy/spiders/main.py
+使用代理
+
+```
+使用提示:
+    * http/https网页均可适用
+    * scrapy不是python原生库，需要安装才能使用: pip install scrapy
+    * 在第一级scrapy_proxy目录下运行如下命令查看结果：scrapy crawl main
+```
+    
+
+    
 
 ## 技术支持
 
