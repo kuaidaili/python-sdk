@@ -81,6 +81,26 @@ class Client:
         return res['data']['new_ip']
 
 
+    def get_dps_valid_time(self, proxy=None, sign_type="simple", **kwargs):
+        """
+        :param proxy: 私密代理列表, 格式： IP:PORT, eg: 113.120.61.166:22989,122.4.44.132:21808
+        :param sign_type: 认证方式
+        :return: 返回data部分, 格式为由'proxy: seconds(剩余秒数)'组成的列表
+        """
+        if not proxy:
+            raise KdlNameError("miss param: proxy")
+        if not (isinstance(proxy, list) or isinstance(proxy, tuple) or isinstance(proxy, str)):
+            raise KdlTypeError("proxy should be a instance of list or tuple or str")
+        if isinstance(proxy, list) or isinstance(proxy, tuple):
+            proxy = ','.join(proxy)
+        endpoint = EndPoint.GetDpsValidTime.value
+        params = self._get_params(endpoint, proxy=proxy, sign_type=sign_type)
+        res = self._get_base_res("GET", endpoint, params)
+        if isinstance(res, dict):
+            return res['data']
+        return res
+
+
     def get_dps(self, num=None, sign_type="simple", **kwargs):
         """
             获取私密代理, 默认"simple"鉴权

@@ -17,6 +17,7 @@ class EndPoint(Enum):
     CheckDpsValid = "dps.kdlapi.com/api/checkdpsvalid"
     CheckOpsValid = "dev.kdlapi.com/api/checkopsvalid"
     GetIpBalance = "dps.kdlapi.com/api/getipbalance"
+    GetDpsValidTime = "dps.kdlapi.com/api/getdpsvalidtime"
     TpsCurrentIp = "tps.kdlapi.com/api/tpscurrentip" # 获取当前隧道代理IP
     ChangeTpsIp = "tps.kdlapi.com/api/changetpsip" # 更改当前隧道代理IP
 

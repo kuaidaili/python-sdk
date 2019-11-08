@@ -108,6 +108,13 @@ class TestDpsOrder(TestBase2):
         balance = self.client.get_ip_balance()
         assert isinstance(balance, int)
 
+    def test_get_dps_valid_time(self):
+        ips = self.client.get_dps(5, format='json', sign_type="hmacsha1")
+        print("ips: ", ips)
+        seconds = self.client.get_dps_valid_time(ips, sign_type="hmacsha1")
+        print("seconds: ", seconds)
+        assert isinstance(seconds, dict)
+
 
 class TestKpsOrder(TestBase):
     """ 独享代理 """
