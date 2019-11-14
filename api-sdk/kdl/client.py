@@ -60,9 +60,7 @@ class Client:
         return True
 
     def tps_current_ip(self, sign_type="simple"):
-        """
-        仅支持支持换IP周期>=1分钟的隧道代理订单
-
+        """仅支持支持换IP周期>=1分钟的隧道代理订单
         获取隧道当前的IP，默认“simple”鉴权
         :param sign_type:默认simple
         :return:返回ip地址。
@@ -74,8 +72,7 @@ class Client:
 
 
     def change_tps_ip(self, sign_type="simple"):
-        """
-         仅支持支持换IP周期>=1分钟的隧道代理订单
+        """仅支持支持换IP周期>=1分钟的隧道代理订单
         :param sign_type: 默认simple
         :return: 返回新的IP地址
         """
@@ -86,7 +83,8 @@ class Client:
 
 
     def get_dps_valid_time(self, proxy=None, sign_type="simple", **kwargs):
-        """
+
+        """获取私密代理ip有效时间
         :param proxy: 私密代理列表, 格式： IP:PORT, eg: 113.120.61.166:22989,122.4.44.132:21808
         :param sign_type: 认证方式
         :return: 返回data部分, 格式为由'proxy: seconds(剩余秒数)'组成的列表
@@ -124,8 +122,7 @@ class Client:
         return res
 
     def check_dps_valid(self, proxy=None, sign_type="simple", **kwargs):
-        """
-            检测私密代理有效性, 强制签名验证
+        """检测私密代理有效性, 强制签名验证
             :return 返回data部分, 格式为由'proxy: True/False'组成的dict
         """
         if not proxy:
@@ -143,8 +140,7 @@ class Client:
         return res
 
     def get_ip_balance(self, sign_type="simple"):
-        """
-            获取计数版订单ip余额, 强制签名验证,
+        """获取计数版订单ip余额, 强制签名验证,
             此接口只对按量付费订单和包年包月的集中提取型订单有效
             :return 返回data中的balance字段, int类型
         """
@@ -195,8 +191,7 @@ class Client:
         return res
 
     def check_ops_valid(self, proxy=None, sign_type="simple", **kwargs):
-        """
-            检测开放代理有效性, 强制签名验证
+        """检测开放代理有效性, 强制签名验证
             :return 返回data部分, 格式为由'proxy: True/False'组成的列表
         """
         if not proxy:
@@ -242,7 +237,8 @@ class Client:
     def _get_base_res(self, method, endpoint, params):
         """ 处理基础请求,
             若响应为json格式则返回请求结果dict
-            否则直接返回原格式 """
+            否则直接返回原格式
+        """
 
         try:
             r = None
