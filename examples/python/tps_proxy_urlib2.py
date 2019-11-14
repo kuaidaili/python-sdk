@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 
 
+"""隧道代理urllib样例使用urllib2请求代理服务器
+    请求http和https网页均适用
 """
- @File            :  tps_proxy_urlib2.py
- @Software        :  PyCharm
- @description     :  隧道代理urllib样例使用urllib2请求代理服务器
-                    请求http和https网页均适用
-"""
+
 import urllib2
 import zlib
 import ssl

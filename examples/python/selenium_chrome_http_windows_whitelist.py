@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
- selenium + chrome + windows + ip白名单
+"""selenium + chrome + windows + ip白名单
 """
 
 from selenium import webdriver

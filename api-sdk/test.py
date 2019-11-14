@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-"""python api sdk单元测试"""
+"""python api sdk单元测试
+"""
 
 from kdl import Auth, Client
 

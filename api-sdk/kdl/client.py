@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+"""封装客户对象
+    封装快代理所有api函数
+"""
+
 import json
 import time
 import requests

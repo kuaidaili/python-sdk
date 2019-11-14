@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
-
+"""使用httplib库使用代理
+"""
 
 import httplib
 import base64

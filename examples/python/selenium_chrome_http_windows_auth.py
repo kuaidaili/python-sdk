@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-    selenium + chrome + windows + 用户名密码认证
+"""selenium + chrome + windows + 用户名密码认证
 """
 from selenium import webdriver
 

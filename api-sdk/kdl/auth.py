@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+"""封装auth对象
+    用于保存用户orderid、apiKey，以及计算签名
+"""
+
 import base64
 import hashlib
 import hmac

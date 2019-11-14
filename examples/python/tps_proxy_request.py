@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
 
-"""
- @File            :  tps_proxy_request.py
- @description     :  HTTP隧道代理 request样例 使用requests请求代理服务器
-                        请求http和https网页均适用
+""" HTTP隧道代理 request样例 使用requests请求代理服务器
+    请求http和https网页均适用
 """
 
 

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+"""枚举各个api的主机+路径
+"""
 
 from enum import Enum, unique
 

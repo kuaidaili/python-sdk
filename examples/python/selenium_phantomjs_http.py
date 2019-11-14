@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
-使用selenium下的无窗口浏览器phantomjs的shttp白名单免登录示例
+'''使用selenium下的无窗口浏览器phantomjs的shttp白名单免登录示例
 因为是无窗口浏览器，所以截了一张图片放在本程序当前目录下
 同时打印了访问网址的title和源代码
 '''

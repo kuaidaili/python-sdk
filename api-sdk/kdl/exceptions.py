@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-
+"""快代理自定义异常
+"""
 import sys
 
 

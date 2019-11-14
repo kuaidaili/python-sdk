@@ -2,11 +2,10 @@
 #-*- coding: utf-8 -*-
 
 """ 使用requests调用API接口
-"""
-
-""" 此样例支持Python2.6-2.7以及3.3-3.7
+此样例支持Python2.6-2.7以及3.3-3.7
 	requests不是python原生库，需要安装才能使用: pip install requests
 """
+
 
 import requests
 

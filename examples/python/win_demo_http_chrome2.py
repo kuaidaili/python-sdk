@@ -1,7 +1,8 @@
 #- * -coding: utf - 8 - * -
 from selenium import webdriver
-#使用http密码登录代理样例
-#这个是Windows下使用selenium的chrome的http认证代理指南
+"""使用http密码登录代理样例
+这个是Windows下使用selenium的chrome的http认证代理指南
+"""
 def create_proxyauth_extension(proxy_host, proxy_port,
                                proxy_username, proxy_password,
                                scheme='http', plugin_path=None):

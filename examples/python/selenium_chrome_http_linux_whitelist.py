@@ -1,10 +1,9 @@
 # _*_ coding:utf‐8 _*
-'''
-基于selenium下Chrome的http白名单访问代理
+"""基于selenium下Chrome的http白名单访问代理
 ubuntu14.04环境
 目前使用虚拟显示支持无窗口操作
 目前不能支持账户密码登录
-'''
+"""
 from selenium import webdriver
 from xvfbwrapper import Xvfb
 
