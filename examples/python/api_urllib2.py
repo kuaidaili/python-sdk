@@ -2,9 +2,8 @@
 #-*- coding: utf-8 -*-
 
 """ 使用urllib2调用API接口
-"""
 
-""" 运行环境要求 python2.6/2.7
+运行环境要求 python2.6/2.7
 """
 
 import urllib2

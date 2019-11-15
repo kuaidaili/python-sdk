@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
 """私密代理使用示例
-    接口鉴权说明：
-    目前支持的鉴权方式有 "simple" 和 "hmacsha1" 两种，默认使用 "simple"鉴权。
-    所有方法均可添加关键字参数sign_type修改鉴权方式。
+   接口鉴权说明：
+   目前支持的鉴权方式有 "simple" 和 "hmacsha1" 两种，默认使用 "simple"鉴权。
+   所有方法均可添加关键字参数sign_type修改鉴权方式。
 """
 
 import kdl
 
-auth = kdl.Auth("977173347636224", "s3mqfikvbo4sw9i9v40vjq6o6gvr5wkw")
+auth = kdl.Auth("test_order_id", "test_api_key")
 client = kdl.Client(auth)
 
 # 获取订单到期时间, 返回时间字符串
@@ -32,7 +32,7 @@ print(client.get_ip_whitelist())
 client.set_ip_whitelist(tuple())
 
 # 提取私密代理ip, 第一个参数为提取的数量, 其他参数以关键字参数的形式传入(不需要传入signature和timestamp)
-# 具体有哪些参数请参考帮助中心: "https://help.kuaidaili.com/api/getdps/"
+# 具体有哪些参数请参考帮助中心: "https://www.kuaidaili.com/doc/api/getdps/"
 # 返回ip列表
 # 注意：若您使用的是python2, 且在终端调用，或在文件中调用且没有加 "# -*- coding: utf-8 -*-" 的话
 # 传入area参数时，请传入unicode类型，如 area=u'北京,上海'

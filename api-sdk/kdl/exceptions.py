@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-"""快代理自定义异常
-"""
+
+"""快代理自定义异常"""
+
 import sys
 
 
@@ -36,14 +37,14 @@ class KdlStatusError(KdlException):
 
 
 class KdlNameError(KdlException):
-    """ 参数异常类 """
+    """参数异常类"""
     def __init__(self, message, code=-2):
         super(KdlNameError, self).__init__(code, message)
         self.hint_message = "[KdlNameError] message: {}".format(self.message)
 
 
 class KdlTypeError(KdlException):
-    """ 类型异常类 """
+    """类型异常类"""
     def __init__(self, message, code=-1):
         super(KdlTypeError, self).__init__(code, message)
         self.hint_message = "[KdlTypeError] message: {}".format(self.message)

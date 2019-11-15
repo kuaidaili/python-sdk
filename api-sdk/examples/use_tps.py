@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """隧道代理使用示例
-    接口鉴权说明：
-    目前支持的鉴权方式有 "simple" 和 "hmacsha1" 两种，默认使用 "simple"鉴权。
-    所有方法均可添加关键字参数sign_type修改鉴权方式。
+   接口鉴权说明：
+   目前支持的鉴权方式有 "simple" 和 "hmacsha1" 两种，默认使用 "simple"鉴权。
+   所有方法均可添加关键字参数sign_type修改鉴权方式。
 """
 
 import kdl
-auth = kdl.Auth("youorderid","youapikey")
+auth = kdl.Auth("test_order_id","test_api_key")
 client = kdl.Client(auth)
 
 expire_time = client.get_order_expire_time()
