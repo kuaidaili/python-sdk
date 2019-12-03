@@ -8,24 +8,34 @@
 import urllib2
 import zlib
 import ssl
+import json
+import random
 
 ssl._create_default_https_context = ssl._create_unverified_context  # 全局取消证书验证，避免访问https网页报错
 
-#要访问的目标网页
+# 要访问的目标网页
 page_url = "http://dev.kdlapi.com/testproxy"
 
-#代理服务器
-proxy = "59.38.241.25:23916"
+# API接口，返回格式为json
+api_url = ""
+ip_list = json.loads(urllib2.urlopen(api_url).read(), encoding="utf-8")['data']['proxy_list']
+proxy = random.choice(ip_list)
 
-#用户名和密码(私密代理/独享代理)
-username = "myusername"
-password = "mypassword"
+# 用户名和密码(私密代理/独享代理)
+username = "username"
+password = "password"
 
+# 私密代理、独享代理
 proxies = {
     "http": "http://%(user)s:%(pwd)s@%(ip)s/" % {'user': username, 'pwd': password, 'ip': proxy},
     "https": "http://%(user)s:%(pwd)s@%(ip)s/" % {'user': username, 'pwd': password, 'ip': proxy}
 }
 
+# 开放代理
+# proxies = {
+#     "http": "http://%(ip)s/" % {'ip': proxy},
+#     "https": "http://%(ip)s/" % {'ip': proxy}
+# }
 req = urllib2.Request(page_url)
 req.add_header("Accept-Encoding", "Gzip") #使用gzip压缩传输数据让访问更快
 proxy_hander = urllib2.ProxyHandler(proxies)

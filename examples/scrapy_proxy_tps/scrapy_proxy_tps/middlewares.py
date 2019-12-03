@@ -6,38 +6,50 @@
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
-from .utils import get_one_proxy
 import logging
 import base64
 
 
-# API接口，返回格式为json
-api_url = ""
-# 非开放代理且未添加白名单，需用户名密码认证
-
-username = "username"
-password = "password"
 logger = logging.getLogger(__name__)
+# 隧道id和密码
+tid = "隧道id"
+password = "隧道密码"
+# 隧道host和端口
+tunnel_master_host = "tps136.kdlapi.com"
+tunnel_master_port = 15818
+# 备用隧道host和端口
+tunnel_slave_host = "tps168.kdlapi.com"
+tunnel_slave_port = 15818
+# 切换阀值
+threshold = 3
 
 
+# 代理中间件
 class ProxyDownloadMiddleware(object):
 
     def process_request(self, request, spider):
+        global threshold
+        if threshold > 0:
+            host, port = tunnel_master_host, tunnel_master_port
+        else:
+            host, port = tunnel_slave_host, tunnel_slave_port
         if request.url.startswith("http://"):
-            request.meta['proxy'] = "http://{proxy_ip}".format(proxy_ip=get_one_proxy(api_url))
+            proxy_url = 'http://{host}:{port}'.format(host=host, port=port)
         elif request.url.startswith("https://"):
-            request.meta['proxy'] = "https://{proxy_ip}".format(proxy_ip=get_one_proxy(api_url))
-        logging.debug("using proxy: {}".format(request.meta['proxy']))
-        # 使用私密代理或独享代理需要将用户名和密码进行base64编码，然后赋值给request.headers["Proxy-Authorization"]
+            proxy_url = 'https://{host}:{port}'.format(host=host, port=port)
+        request.meta['proxy'] = proxy_url  # 设置代理
+        logger.debug("using proxy: {}".format(request.meta['proxy']))
+        # 隧道代理需要进行身份验证
         #
-        # 如果是开放代理就不需要以下步骤，直接设置代理IP即可
-        user_password = "{username}:{password}".format(username=username, password=password)
-        b64_user_password = base64.b64encode(user_password.encode("utf-8"))
-        request.headers["Proxy-Authorization"] = "Basic " + b64_user_password.decode("utf-8")
+        # 用户名和密码需要先进行base64编码，然后再赋值
+        username_password = "{tid}:{password}".format(tid=tid, password=password)
+        b64_username_password = base64.b64encode(username_password.encode('utf-8'))
+        request.headers['Proxy-Authorization'] = 'Basic ' + b64_username_password.decode('utf-8')
+        threshold -= 1
         return None
 
 
-class ScrapyProxySpiderMiddleware(object):
+class ScrapyProxyTpsSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
     # passed objects.
@@ -85,7 +97,7 @@ class ScrapyProxySpiderMiddleware(object):
         spider.logger.info('Spider opened: %s' % spider.name)
 
 
-class ScrapyProxyDownloaderMiddleware(object):
+class ScrapyProxyTpsDownloaderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the downloader middleware does not modify the
     # passed objects.

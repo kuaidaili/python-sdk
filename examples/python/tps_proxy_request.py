@@ -5,8 +5,6 @@
     请求http和https网页均适用
 """
 
-
-
 import requests
 
 # 要访问的目标网页
@@ -19,8 +17,8 @@ tunnel_host = "tps136.kdlapi.com"
 tunnel_port = "15818"
 
 # 隧道id和密码
-tid = "t17179273317142"
-password = "radiance"
+tid = ""
+password = ""
 
 proxies = {
     "http": "http://%s:%s@%s:%s/" % (tid, password, tunnel_host, tunnel_port),

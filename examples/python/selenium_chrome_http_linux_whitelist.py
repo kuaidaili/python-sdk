@@ -5,11 +5,15 @@ ubuntu14.04环境
 目前不能支持账户密码登录
 """
 from selenium import webdriver
-from xvfbwrapper import Xvfb
+# from xvfbwrapper import Xvfb ### fcntl
+import requests
+import random
 
-#代理服务器IP和端口
-proxy = '59.38.241.25:23916'
-
+# 代理服务器IP和端口
+api_url = "https://svip.kdlapi.com/api/getproxy/?orderid=947449222924633&num=100&protocol=1&method=2&an_an=1&an_ha=1&quality=2&format=json&sep=1"
+ip_list = requests.get(api_url).json()['data']['proxy_list']
+proxy = random.choice(ip_list)
+print(proxy)
 #要访问的目标网页
 page_url = 'http://dev.kuaidaili.com/testproxy'
 
@@ -29,21 +33,22 @@ desired_capabilities['proxy'] = {
 }
 
 #使用新实例驱动
-options = webdriver.ChromeOptions()
+options = webdriver.FirefoxOptions()
 options.add_argument('--headless')
-
-#无窗口启动Chrome
-xvfb = Xvfb()
-xvfb.start()
-driver = webdriver.Chrome(chrome_options=options,desired_capabilities=desired_capabilities)
-
-#尝试访问登陆页面，登录页面有你的代理IP
-driver.get(page_url)
-
-#打印访问网页的title和源代码
-print driver.title
-print driver.page_source
-
-#关闭
-driver.quit()
-xvfb.stop()
+driver = webdriver.Firefox(firefox_options=options)
+driver.get("http://dev.kdlapi.com/testproxy")
+# 无窗口启动Chrome
+# xvfb = Xvfb()
+# xvfb.start()
+# driver = webdriver.Chrome(chrome_options=options,desired_capabilities=desired_capabilities)
+#
+# #尝试访问登陆页面，登录页面有你的代理IP
+# driver.get(page_url)
+#
+# #打印访问网页的title和源代码
+# print driver.title
+# print driver.page_source
+#
+# #关闭
+# driver.quit()
+# xvfb.stop()

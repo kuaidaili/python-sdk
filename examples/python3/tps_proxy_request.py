@@ -18,15 +18,14 @@ page_urls = ["http://dev.kdlapi.com/testproxy",
 tunnel_host = "tps136.kdlapi.com"
 tunnel_port = "15818"
 
-# 隧道id和密码
-tid = "t17179273317142"
-password = "radiance"
+# 隧道用户名密码
+tid = ""
+password = ""
 
 proxies = {
         "http": "http://%s:%s@%s:%s/" % (tid, password, tunnel_host, tunnel_port),
-        "https": "http://%s:%s@%s:%s/" % (tid, password, tunnel_host, tunnel_port)
+        "https": "https://%s:%s@%s:%s/" % (tid, password, tunnel_host, tunnel_port)
     }
-
 headers = {
     "Accept-Encoding": "Gzip",  # 使用gzip压缩传输数据让访问更快
 }

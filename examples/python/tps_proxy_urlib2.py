@@ -21,8 +21,8 @@ tunnel_host = "tps136.kdlapi.com"
 tunnel_port = "15818"
 
 # 隧道id和密码
-tid = "t17179273317142"
-password = "radiance"
+tid = ""
+password = ""
 
 proxies = {
     "http": "http://%s:%s@%s:%s/" % (tid, password, tunnel_host, tunnel_port),

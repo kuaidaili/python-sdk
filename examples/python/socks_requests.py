@@ -6,17 +6,19 @@
 """
 
 import requests
-import base64
+import random
 
-#要访问的目标网页
+# 要访问的目标网页
 page_url = "http://dev.kdlapi.com/testproxy"
 
-#代理服务器
-proxy = "59.38.241.25:23918"
+# API接口，返回格式为json
+api_url = ""
+ip_list = requests.get(api_url).json()['data']['proxy_list']
+proxy = random.choice(ip_list)
 
-#用户名和密码(私密代理/独享代理)
-username = "myusername"
-password = "mypassword"
+# 用户名和密码(私密代理/独享代理)
+username = "username"
+password = "password"
 
 proxies = {
     'http': 'socks5://%s:%s@%s' % (username, password, proxy),
@@ -30,8 +32,8 @@ headers = {
 
 r = requests.get(page_url, proxies=proxies, headers=headers)
 
-print r.status_code #获取Reponse的返回码
+print(r.status_code) #获取Reponse的返回码
 
 if r.status_code == 200:
     r.enconding = "utf-8" #设置返回内容的编码
-    print r.content #获取页面内容
+    print(r.content) #获取页面内容

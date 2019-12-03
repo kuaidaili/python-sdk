@@ -2,7 +2,6 @@
 """selenium + chrome + windows + 用户名密码认证
 """
 from selenium import webdriver
-
 proxyauth_plugin_path = create_proxyauth_extension(
     proxy_host="42.49.11.109",  # 代理服务器ip
     proxy_port=16816,           # 代理服务器端口
