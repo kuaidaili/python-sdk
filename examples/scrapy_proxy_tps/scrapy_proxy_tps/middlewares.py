@@ -12,8 +12,8 @@ import base64
 
 logger = logging.getLogger(__name__)
 # 隧道id和密码
-tid = "隧道id"
-password = "隧道密码"
+tid = "t17465430110330"
+password = "nw40z6ni"
 # 隧道host和端口
 tunnel_master_host = "tps136.kdlapi.com"
 tunnel_master_port = 15818

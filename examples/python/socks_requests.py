@@ -12,13 +12,13 @@ import random
 page_url = "http://dev.kdlapi.com/testproxy"
 
 # API接口，返回格式为json
-api_url = ""
+api_url = "https://dps.kdlapi.com/api/getdps/?orderid=927441114016541&num=10&pt=2&format=json&sep=1"
 ip_list = requests.get(api_url).json()['data']['proxy_list']
 proxy = random.choice(ip_list)
 
 # 用户名和密码(私密代理/独享代理)
-username = "username"
-password = "password"
+username = "treezeng"
+password = "nrfrqd5o"
 
 proxies = {
     'http': 'socks5://%s:%s@%s' % (username, password, proxy),
@@ -31,6 +31,8 @@ headers = {
 }
 
 r = requests.get(page_url, proxies=proxies, headers=headers)
+# 发送post请求
+# r = requests.post("http://dev.kdlapi.com/testproxy", proxies=proxies, headers=headers, data={'info': "send post request"})
 
 print(r.status_code) #获取Reponse的返回码
 

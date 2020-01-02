@@ -19,8 +19,8 @@ tunnel_host = "tps136.kdlapi.com"
 tunnel_port = "15818"
 
 # 隧道用户名密码
-tid = ""
-password = ""
+tid = "t17465430110330"
+password = "nw40z6ni"
 
 proxies = {
         "http": "http://%s:%s@%s:%s/" % (tid, password, tunnel_host, tunnel_port),
@@ -32,6 +32,8 @@ headers = {
 
 for url in page_urls:
     r = requests.get(url, proxies=proxies, headers=headers)
+    # 发送post请求
+    # r = requests.post("http://dev.kdlapi.com/testproxy", proxies=proxies, data={"info": "send post request"})
 
     print(r.status_code)  # 获取Reponse的返回码
 

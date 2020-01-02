@@ -8,6 +8,7 @@
                     请求http和https网页均适用
 """
 import urllib.request
+from urllib.parse import urlencode
 import zlib
 import ssl
 
@@ -19,12 +20,12 @@ page_urls = ["http://dev.kdlapi.com/testproxy",
              ]
 
 # 隧道服务器
-tunnel_host = ""
-tunnel_port = ""
+tunnel_host = "tps136.kdlapi.com"
+tunnel_port = "15818"
 
 # 隧道id和密码
-tid = ""
-password = ""
+tid = "t17465430110330"
+password = "nw40z6ni"
 
 proxies = {
     "http": "http://%s:%s@%s:%s/" % (tid, password, tunnel_host, tunnel_port),
@@ -40,8 +41,12 @@ for url in page_urls:
     opener = urllib.request.build_opener(proxy_hander)
 
     req = urllib.request.Request(url=url, headers=headers)
-
     result = opener.open(req)
+
+    # 发送post请求
+    # req = urllib.request.Request(url="http://dev.kdlapi.com/testproxy", headers=headers)
+    # result = opener.open(req, data=bytes(urlencode({"info": "send post request"}), encoding="utf-8"))
+
     print(result.status)  # 获取Response的返回码
 
     content_encoding = result.headers.get('Content-Encoding')

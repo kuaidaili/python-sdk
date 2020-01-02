@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import urllib.request
+from urllib.parse import urlencode
 import zlib
 import json
 import random
@@ -16,8 +17,8 @@ import random
 # 要访问的目标网页
 page_url = "https://dev.kdlapi.com/testproxy/"
 
-# API接口, 返回格式为json
-api_url = "https://svip.kdlapi.com/api/getproxy/?orderid=947449222924633&num=100&protocol=1&method=2&an_an=1&an_ha=1&quality=2&format=json&sep=1"
+# API接口, API加密传输：加密(https)、返回格式：json
+api_url = "https://svip.kdlapi.com/api/getproxy/?orderid=947449222924633&num=100&signature=atvb6a4981d03pvpqalolea9e0k2pmi6&protocol=2&method=2&an_an=1&an_ha=1&quality=2&format=json&sep=1"
 # API接口返回的ip
 response = urllib.request.urlopen(api_url)
 json_dict = json.loads(response.read().decode('utf-8'))
@@ -39,6 +40,9 @@ handler = urllib.request.ProxyHandler(proxies)
 opener = urllib.request.build_opener(handler)
 
 req = urllib.request.Request(url=page_url, headers=headers)
+# 发送post请求
+# data = bytes(urlencode({"info": "send post request"}), encoding="utf-8")
+# req = urllib.request.Request(url="http://dev.kdlapi.com/testproxy", headers=headers, data=data, method="post")
 
 result = opener.open(req)
 print(result.status)  # 获取Response的返回码

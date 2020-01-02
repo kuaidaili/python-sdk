@@ -6,6 +6,7 @@
 """
 
 import urllib2
+from urllib import urlencode
 import random
 import json
 import zlib
@@ -17,7 +18,7 @@ from sockshandler import SocksiPyHandler
 page_url = "http://dev.kdlapi.com/testproxy"
 
 # API接口
-api_url = ""
+api_url = "https://dps.kdlapi.com/api/getdps/?orderid=927441114016541&num=10&pt=2&format=json&sep=1"
 # API接口返回的IP
 ip_list = json.loads(urllib2.urlopen(api_url).read().decode('utf-8'))['data']['proxy_list']
 print(ip_list)
@@ -28,15 +29,16 @@ proxy_port = int(proxy_port)
 rdns = False  # 是否在代理服务器上进行dns查询
 
 # 用户名和密码(私密代理/独享代理)
-username = "username"
-password = "password"
+username = "treezeng"
+password = "nrfrqd5o"
 
 opener = urllib2.build_opener(SocksiPyHandler(socks.SOCKS5, proxy_ip, proxy_port, rdns, username, password))
 opener.addheaders = [
     ("Accept-Encoding", "Gzip"),  # 使用gzip压缩传输数据让访问更快
 ]
 r = opener.open(page_url)
-
+# 发送post请求
+# r = opener.open("http://dev.kdlapi.com/testproxy", data=bytes(urlencode({'info': "send post request"})))
 print r.code # 获取Reponse的返回码
 content = r.read()
 content_encoding = r.headers.getheader("Content-Encoding")

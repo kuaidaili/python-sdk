@@ -12,11 +12,11 @@ import base64
 
 
 # API接口，返回格式为json
-api_url = ""
+api_url = "https://kps.kdlapi.com/api/getkps/?orderid=967449798518947&num=2&pt=1&format=json&sep=1"
 # 非开放代理且未添加白名单，需用户名密码认证
 
-username = "username"
-password = "password"
+username = "treezeng"
+password = "nrfrqd5o"
 logger = logging.getLogger(__name__)
 
 

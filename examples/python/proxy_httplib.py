@@ -6,6 +6,7 @@
 
 import httplib
 import urllib2
+import urllib
 import json
 import random
 import base64
@@ -14,7 +15,7 @@ import base64
 page_url = r"http://dev.kuaidaili.com/testproxy"
 
 # API接口
-api_url = "开放代理、独享代理或私密代理的API接口"
+api_url = "https://kps.kdlapi.com/api/getkps/?orderid=967449798518947&num=2&pt=1&format=json&sep=1"
 
 # API接口返回的IP
 req = urllib2.Request(api_url)
@@ -23,8 +24,8 @@ ip, port = random.choice(ip_list).split(":")
 port = int(port)
 
 # 用户名和密码(私密代理/独享代理)， 如果是开放代理的就不需要用户名和密码
-username = "username"
-password = "password"
+username = "treezeng"
+password = "nrfrqd5o"
 
 # 用户名和密码需要先进行base64编码，再使用
 user_password = "{username}:{password}".format(username=username, password=password)
@@ -36,13 +37,15 @@ headers = {
 }
 # 使用代理
 conn = httplib.HTTPConnection(ip, port)
-# 发起请求
 conn.request("GET", page_url, headers=headers)
+
+# 发起请求
+# body = bytes(urllib.urlencode({"info": "send post request"}))
+# conn.request("POST", "http://dev.kdlapi.com/testproxy", body=body, headers=headers)
+
 response = conn.getresponse()
 print response.status
 print response.getheaders()
 if response.status == 200:
     content = response.read()
     print content
-
-

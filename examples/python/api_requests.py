@@ -9,11 +9,12 @@
 import requests
 
 # API接口
-api_url = "开放代理的API链接"
+api_url = "https://svip.kdlapi.com/api/getproxy/?orderid=947449222924633&num=100&signature=atvb6a4981d03pvpqalolea9e0k2pmi6&protocol=1&method=2&an_an=1&an_ha=1&format=json&sep=1"
 
 r = requests.get(api_url)
 
 print r.status_code  # 获取Reponse的返回码
+
 
 if r.status_code == 200:
     r.enconding = "utf-8"  # 设置返回内容的编码
