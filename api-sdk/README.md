@@ -68,7 +68,7 @@ client.set_ip_whitelist(tuple())
 # 返回ip列表
 # 注意：若您使用的是python2, 且在终端调用，或在文件中调用且没有加 "# -*- coding: utf-8 -*-" 的话
 # 传入area参数时，请传入unicode类型，如 area=u'北京,上海'
-ips = client.get_dps(2, sign_type='hmacsha1', format='json', pt=2, area='北京,上海,广东')
+ips = client.get_dps(2, sign_type='hmacsha1', format='json', pt=1, area='北京,上海,广东')
 print("dps proxy: ", ips)
 
 
