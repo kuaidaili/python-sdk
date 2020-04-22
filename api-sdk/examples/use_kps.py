@@ -33,3 +33,11 @@ client.set_ip_whitelist(tuple())
 # 传入area参数时，请传入unicode类型，如 area=u'北京,上海'
 ips = client.get_kps(2, sign_type='hmacsha1', format='json', pt=2, area='北京,上海,广东')
 print("kps proxy: ", ips)
+
+# 获取代理鉴权信息
+# 获取指定订单访问代理IP的鉴权信息。
+# 鉴权信息包含用户名密码，用于请求私密代理/独享代理/隧道代理时进行身份验证。
+# plain_text 为1 表示明文显示用户名和密码
+# 具体请看：https://www.kuaidaili.com/doc/api/getproxyauthorization/
+proxyauthorization = client.get_proxy_authorization(plain_text=1,sign_type='simple')
+print("proxyauthorization: ", proxyauthorization)

@@ -55,4 +55,10 @@ print("seconds: ", seconds)
 balance = client.get_ip_balance(sign_type='hmacsha1')
 print("balance: ", balance)
 
-
+# 获取代理鉴权信息
+# 获取指定订单访问代理IP的鉴权信息。
+# 鉴权信息包含用户名密码，用于请求私密代理/独享代理/隧道代理时进行身份验证。
+# plain_text 为1 表示明文显示用户名和密码
+# 具体请看：https://www.kuaidaili.com/doc/api/getproxyauthorization/
+proxyauthorization = client.get_proxy_authorization(plain_text=1,sign_type='simple')
+print("proxyauthorization: ", proxyauthorization)

@@ -15,6 +15,7 @@ orderid = "youorderid"
 apikey = "youapikey"
 
 
+
 ip_pattern = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
 ip_port_pattern = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]):\d{2,5}$"
 time_pattern = "(((01[0-9]{2}|0[2-9][0-9]{2}|[1-9][0-9]{3})-(0?[13578]|1[02])-(0?[1-9]|[12]\\d|3[01]))|((01[0-9]{2}|0[2-9][0-9]{2}|[1-9][0-9]{3})-(0?[13456789]|1[012])-(0?[1-9]|[12]\\d|30))|((01[0-9]{2}|0[2-9][0-9]{2}|[1-9][0-9]{3})-0?2-(0?[1-9]|1\\d|2[0-8]))|(((1[6-9]|[2-9]\\d)(0[48]|[2468][048]|[13579][26])|((04|08|12|16|[2468][048]|[3579][26])00))-0?2-29)) (20|21|22|23|[0-1]?\\d):[0-5]?\\d:[0-5]?\\d"
@@ -64,7 +65,7 @@ class TestBase(unittest.TestCase):
 
 
 class TestBase2(TestBase):
-    """具有获取IP白名单api和设置IP白名单的api的类，
+    """具有获取IP白名单api和设置IP白名单的api,获取鉴权信息api的类，
         目前只有私密代理，独享代理，隧道代理"""
 
     def test_get_ip_whitelist(self):
@@ -83,6 +84,11 @@ class TestBase2(TestBase):
         set_ip_list.reverse()
         assert len(ip_whitelist) == 2 and isinstance(ip_whitelist, list) and is_valid_ip_list(ip_whitelist,ip_pattern) and ip_whitelist == set_ip_list
         self.client.set_ip_whitelist([])
+
+    def test_get_proxy_authorization(self):
+        data = self.client.get_proxy_authorization(plain_text=1,sign_type='simple')
+        assert isinstance(data, dict)
+        print(data)
 
 
 class TestDpsOrder(TestBase2):
@@ -115,7 +121,8 @@ class TestDpsOrder(TestBase2):
         seconds = self.client.get_dps_valid_time(ips, sign_type="hmacsha1")
         print("seconds: ", seconds)
         assert isinstance(seconds, dict)
-
+    
+   
 
 class TestKpsOrder(TestBase):
     """ 独享代理 """
@@ -136,7 +143,6 @@ class TestKpsOrder(TestBase):
         """检测还剩多少ip地址可以提取"""
         with self.assertRaises(KdlException):
             self.client.get_ip_balance()
-
 
 class TestOpsOrder(TestBase):
     """ 开放代理 """
@@ -165,7 +171,6 @@ class TestOpsOrder(TestBase):
         with self.assertRaises(KdlException):
             self.client.get_ip_balance()
 
-
 class TestTpsOrder(TestBase2):
     name = "隧道代理"
 
@@ -178,6 +183,8 @@ class TestTpsOrder(TestBase2):
         """立即改变隧道ip"""
         new_ip = self.client.change_tps_ip()
         assert len(new_ip.split('.')) == 4 and is_valid_str(new_ip,ip_pattern)
+    
+    
 
 
 class TestExpiredKpsOrder(unittest.TestCase):
@@ -237,6 +244,6 @@ class TestNoApiKeyOrder(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestOpsOrder)
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestTpsOrder)
     unittest.TextTestRunner(verbosity=2).run(suite)
 

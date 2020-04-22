@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='kdl',
-    version='0.2.8',
+    version='0.2.9',
     description=(
         'kuaidaili api sdk python, site: https://www.kuaidaili.com'
     ),
