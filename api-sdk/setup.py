@@ -8,7 +8,7 @@ setup(
     description=(
         'kuaidaili api sdk python, site: https://www.kuaidaili.com'
     ),
-    long_description=open('README.rst').read().decode('utf-8'),
+    long_description=open('README.rst').read(),
     author='kuaidaili-dev',
     author_email='service@kuaidaili.com',
     license='BSD License',
