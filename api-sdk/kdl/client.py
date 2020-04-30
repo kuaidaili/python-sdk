@@ -92,6 +92,23 @@ class Client:
         params = self._get_params(endpoint,sign_type=sign_type)
         res = self._get_base_res("GET",endpoint,params)
         return res['data']['new_ip']
+    
+    def get_tps_ip(self, num=None, sign_type="simple", **kwargs):
+        """获取隧道代理IP, 默认"simple"鉴权 https://www.kuaidaili.com/doc/api/gettps/
+           :param num : 提取数量，int类型
+           :param kwargs: 其他关键字参数，具体有那些参数请查看帮助中心api说明
+           :return 若为json格式, 则返回data中proxy_list部分, 即proxy列表, 否则原样返回
+        """
+        if num is None:
+            raise KdlNameError("miss param: num")
+        if not isinstance(num, int):
+            KdlTypeError("num should be a integer")
+        endpoint = EndPoint.GetTps.value
+        params = self._get_params(endpoint, num=num, sign_type=sign_type, **kwargs)
+        res = self._get_base_res("GET", endpoint, params)
+        if isinstance(res, dict):
+            return res['data']['proxy_list']
+        return res
 
     def get_dps_valid_time(self, proxy=None, sign_type="simple", **kwargs):
         """获取私密代理ip有效时间

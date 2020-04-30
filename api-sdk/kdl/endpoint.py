@@ -23,5 +23,7 @@ class EndPoint(Enum):
     GetDpsValidTime = "dps.kdlapi.com/api/getdpsvalidtime"
     TpsCurrentIp = "tps.kdlapi.com/api/tpscurrentip" # 获取当前隧道代理IP
     ChangeTpsIp = "tps.kdlapi.com/api/changetpsip" # 更改当前隧道代理IP
+    GetTps = "tps.kdlapi.com/api/gettps"  # 获取隧道代理IP
     GetProxyAuthorization = "dev.kdlapi.com/api/getproxyauthorization" # 获取代理鉴权信息
+    
 
