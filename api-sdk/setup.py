@@ -1,14 +1,21 @@
 # -*- coding: utf-8 -*-
 
+import sys
 from setuptools import setup
+
+if sys.version_info < (3,0):
+    long_description_file = open('README.rst').read()
+else:
+    long_description_file=open('README.rst', encoding='UTF-8').read()
 
 setup(
     name='kdl',
-    version='0.2.12',
+    version='0.2.13',
     description=(
         'kuaidaili api sdk python, site: https://www.kuaidaili.com'
     ),
-    long_description=open('README.rst').read(),
+
+    long_description=long_description_file,
     author='kuaidaili-dev',
     author_email='service@kuaidaili.com',
     license='BSD License',

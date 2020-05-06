@@ -183,7 +183,10 @@ class TestTpsOrder(TestBase2):
         """立即改变隧道ip"""
         new_ip = self.client.change_tps_ip()
         assert len(new_ip.split('.')) == 4 and is_valid_str(new_ip,ip_pattern)
-    
+
+    def test_get_tps(self):
+        tps_list = self.client.get_tps(2,sign_type='hmacsha1', format='json')
+        assert isinstance(tps_list, list)
     
 
 

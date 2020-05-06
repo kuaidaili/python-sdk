@@ -93,7 +93,7 @@ class Client:
         res = self._get_base_res("GET",endpoint,params)
         return res['data']['new_ip']
     
-    def get_tps_ip(self, num=None, sign_type="simple", **kwargs):
+    def get_tps(self, num=None, sign_type="simple", **kwargs):
         """获取隧道代理IP, 默认"simple"鉴权 https://www.kuaidaili.com/doc/api/gettps/
            :param num : 提取数量，int类型
            :param kwargs: 其他关键字参数，具体有那些参数请查看帮助中心api说明

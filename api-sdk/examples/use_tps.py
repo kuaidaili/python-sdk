@@ -43,8 +43,8 @@ print("proxyauthorization: ", proxyauthorization)
 # 获取隧道代理IP
 # 获取订单对应的隧道代理IP。
 # 具体参数请查看：https://www.kuaidaili.com/doc/api/gettps/
-proxy_list = client.get_tps_ip(2,sign_type='hmacsha1', format='json')
-print(proxy_list)
+tps_list = client.get_tps(2,sign_type='hmacsha1', format='json')
+print(tps_list)
 
 
 
