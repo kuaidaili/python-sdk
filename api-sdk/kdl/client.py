@@ -232,6 +232,17 @@ class Client:
             return res['data']
         return res
 
+    def get_ua(self, num=1, **kwargs):
+        """获取User Agent
+           :return 若为json格式, 则返回data中ua_list部分, 即user agent列表, 否则原样返回
+        """
+        endPoint = EndPoint.GetUserAgent.value
+        params = self._get_params(endPoint, num=num, sign_type="simple", **kwargs)
+        res = self._get_base_res("GET", endPoint, params)
+        if isinstance(res, dict):
+            return res['data']["ua_list"]
+        return res
+
     def _get_params(self, endpoint, **kwargs):
         """构造请求参数"""
         params = dict(orderid=self.auth.orderId)

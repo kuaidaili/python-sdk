@@ -25,5 +25,6 @@ class EndPoint(Enum):
     ChangeTpsIp = "tps.kdlapi.com/api/changetpsip" # 更改当前隧道代理IP
     GetTps = "tps.kdlapi.com/api/gettps"  # 获取隧道代理IP
     GetProxyAuthorization = "dev.kdlapi.com/api/getproxyauthorization" # 获取代理鉴权信息
+    GetUserAgent = "dev.kdlapi.com/api/getua"   # 获取User Agent
     
 
