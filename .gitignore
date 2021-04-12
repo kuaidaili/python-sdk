@@ -1,1 +1,5 @@
 *.pyc
+/venv
+.idea
+*.bat
+*.log
