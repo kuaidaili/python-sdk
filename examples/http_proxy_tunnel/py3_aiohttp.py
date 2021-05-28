@@ -9,6 +9,7 @@
 
 import aiohttp
 import asyncio
+# asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy()) windows系统请求https网站报错时调用此方法
 
 page_url = "https://dev.kdlapi.com/testproxy"  # 要访问的目标网页
 
