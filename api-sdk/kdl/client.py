@@ -28,7 +28,6 @@ class Client:
         if isinstance(res, dict):
             return res['data']['expire_time']
         return res
-    
 
     def get_proxy_authorization(self, plain_text=0, sign_type="simple"):
         """获取指定订单访问代理IP的鉴权信息。
@@ -36,12 +35,11 @@ class Client:
             :return 返回信息的字典
         """
         endpoint = EndPoint.GetProxyAuthorization.value
-        params = self._get_params(endpoint,plaintext=plain_text,sign_type=sign_type)
+        params = self._get_params(endpoint, plaintext=plain_text, sign_type=sign_type)
         res = self._get_base_res("GET", endpoint, params)
         if isinstance(res, dict):
             return res['data']
         return res
-
 
     def get_ip_whitelist(self, sign_type="simple"):
         """获取订单的ip白名单, 强制签名验证
@@ -79,8 +77,8 @@ class Client:
            :return:返回ip地址。
         """
         endpoint = EndPoint.TpsCurrentIp.value
-        params = self._get_params(endpoint,sign_type=sign_type)
-        res = self._get_base_res("GET",endpoint,params)
+        params = self._get_params(endpoint, sign_type=sign_type)
+        res = self._get_base_res("GET", endpoint, params)
         return res['data']['current_ip']
 
     def change_tps_ip(self, sign_type="simple"):
@@ -89,10 +87,10 @@ class Client:
            :return: 返回新的IP地址
         """
         endpoint = EndPoint.ChangeTpsIp.value
-        params = self._get_params(endpoint,sign_type=sign_type)
-        res = self._get_base_res("GET",endpoint,params)
+        params = self._get_params(endpoint, sign_type=sign_type)
+        res = self._get_base_res("GET", endpoint, params)
         return res['data']['new_ip']
-    
+
     def get_tps(self, num=None, sign_type="simple", **kwargs):
         """获取隧道代理IP, 默认"simple"鉴权 https://www.kuaidaili.com/doc/api/gettps/
            :param num : 提取数量，int类型
@@ -152,8 +150,7 @@ class Client:
         """
         if not proxy:
             raise KdlNameError("miss param: proxy")
-        if not (isinstance(proxy, list) or isinstance(proxy, tuple) or isinstance(proxy, str) or isinstance(proxy,
-                                                                                                            unicode)):
+        if not (isinstance(proxy, list) or isinstance(proxy, tuple) or isinstance(proxy, str) or isinstance(proxy, unicode)):
             raise KdlTypeError("proxy should be a instance of list or tuple or str")
         if isinstance(proxy, list) or isinstance(proxy, tuple):
             proxy = ','.join(proxy)
@@ -236,11 +233,33 @@ class Client:
         """获取User Agent
            :return 若为json格式, 则返回data中ua_list部分, 即user agent列表, 否则原样返回
         """
-        endPoint = EndPoint.GetUserAgent.value
+        endPoint = EndPoint.GetUA.value
         params = self._get_params(endPoint, num=num, sign_type="simple", **kwargs)
         res = self._get_base_res("GET", endPoint, params)
         if isinstance(res, dict):
             return res['data']["ua_list"]
+        return res
+
+    def get_area_code(self, area, **kwargs):
+        """获取指定地区编码
+           :return:
+        """
+        endpoint = EndPoint.GetAreaCode.value
+        params = self._get_params(endpoint, area=area, sign_type="simple", **kwargs)
+        res = self._get_base_res("GET", endpoint, params)
+        if isinstance(res, dict):
+            return res['data']
+        return res
+
+    def get_account_balance(self, **kwargs):
+        """获取账户余额
+           :return:
+        """
+        endpoint = EndPoint.GetAccountBalance.value
+        params = self._get_params(endpoint, sign_type="simple", **kwargs)
+        res = self._get_base_res("GET", endpoint, params)
+        if isinstance(res, dict):
+            return res['data']
         return res
 
     def _get_params(self, endpoint, **kwargs):
@@ -283,7 +302,7 @@ class Client:
                 r = requests.post("https://" + endpoint, data=params)
 
             if r.status_code != 200:
-                raise KdlStatusErrorR(r.status_code, r.content.decode('utf8'))
+                raise KdlStatusError(r.status_code, r.content.decode('utf8'))
             try:
                 res = json.loads(r.content.decode('utf8'))
                 code, msg = res['code'], res['msg']
