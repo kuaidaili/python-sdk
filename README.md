@@ -233,9 +233,7 @@ scrapy项目标准目录结构如下：
 ### python3/tps_proxy_request.py
 使用requests请求隧道代理服务器, 支持访问http和https网页。推荐使用
 ```
-使用提示:
-    * 基于requests的代码样例支持支持访问http和https网页。推荐使用
-    *
+使用提示: 基于requests的代码样例支持支持访问http和https网页。推荐使用
 ```
 
 ### python3/tps_proxy_urllib.py
