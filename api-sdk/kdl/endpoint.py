@@ -30,3 +30,10 @@ class EndPoint(Enum):
     GetUA = "www.kuaidaili.com/api/getua"  # 获取User Agent
     GetAreaCode = "dev.kdlapi.com/api/getareacode"  # 获取指定地区编码
     GetAccountBalance = "dev.kdlapi.com/api/getaccountbalance"  # 获取账户余额
+
+    # 订单相关接口
+    CreateOrder = "dev.kdlapi.com/api/createorder"   # 创建订单
+    GetOrderInfo = "dev.kdlapi.com/api/getorderinfo"  # 获取订单信息
+    SetAutoRenew = "dev.kdlapi.com/api/setautorenew"  # 开启/关闭自动续费
+    CloseOrder = "dev.kdlapi.com/api/closeorder"  # 关闭订单
+    QueryKpsCity = "dev.kdlapi.com/api/querykpscity"  # 查询独享代理城市信息

@@ -262,6 +262,57 @@ class Client:
             return res['data']
         return res
 
+    def create_order(self, product, pay_type, **kwargs):
+        """创建订单，自动从账户余额里结算费用
+           :return:
+        """
+        if not (product and pay_type):
+            raise KdlNameError('miss param: product or pay_type')
+        endpoint = EndPoint.CreateOrder.value
+        params = self._get_params(endpoint,product=product, pay_type=pay_type, sign_type="hmacsha1", **kwargs)
+        res = self._get_base_res("GET", endpoint, params)
+        return res
+
+    def get_order_info(self, **kwargs):
+        """获取订单的详细信息
+           :return:
+        """
+        endpoint = EndPoint.GetOrderInfo.value
+        params = self._get_params(endpoint, sign_type="hmacsha1", **kwargs)
+        res = self._get_base_res("GET", endpoint, params)
+        return res
+
+    def set_auto_renew(self, autorenew, **kwargs):
+        """开启/关闭自动续费
+           :return:
+        """
+        if not autorenew:
+            raise KdlNameError('miss param: autorenew')
+        endpoint = EndPoint.SetAutoRenew.value
+        params = self._get_params(endpoint, autorenew=autorenew, sign_type="hmacsha1", **kwargs)
+        res = self._get_base_res("GET", endpoint, params)
+        return res
+
+    def close_order(self, **kwargs):
+        """关闭指定订单, 此接口只对按量付费(后付费)订单有效
+           :return:
+        """
+        endpoint = EndPoint.CloseOrder.value
+        params = self._get_params(endpoint, sign_type="hmacsha1", **kwargs)
+        res = self._get_base_res("GET", endpoint, params)
+        return res
+
+    def query_kps_city(self, serie, **kwargs):
+        """查询独享代理有哪些城市可供开通。对于IP共享型还可查询到每个城市可开通的IP数量。
+           :return:
+        """
+        if not serie:
+            raise KdlNameError('miss params: serie')
+        endpoint = EndPoint.QueryKpsCity.value
+        params = self._get_params(endpoint, serie=serie, sign_type="hmacsha1", **kwargs)
+        res = self._get_base_res("GET", endpoint, params)
+        return res
+
     def _get_params(self, endpoint, **kwargs):
         """构造请求参数"""
         params = dict(orderid=self.auth.orderId)
