@@ -68,7 +68,7 @@
 
 欢迎提交 `Pull request` 以使代码样例更加完善。
 
-获取更多关于调用 API 和代理服务器使用的资料，请参考[开发者指南](https://help.kuaidaili.com/dev/api/)。
+获取更多关于调用 API 和代理服务器使用的资料，请参考[快代理文档中心](https://www.kuaidaili.com/helpcenter/)。
 
 * 技术支持微信：<a href="https://img.kuaidaili.com/img/service_wx.jpg">kuaidaili</a>
 * 技术支持QQ：<a href="http://q.url.cn/CDksXo?_type=wpa&qidian=true">800849628</a>
