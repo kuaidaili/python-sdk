@@ -117,3 +117,4 @@ class ProxyDownloaderMiddleware:
         # 白名单认证(私密代理/独享代理)
         # request.meta['proxy'] = "http://%(proxy)s/" % {"proxy": proxy}
         return None
+
