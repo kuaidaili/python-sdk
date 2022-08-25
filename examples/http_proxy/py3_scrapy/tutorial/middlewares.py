@@ -4,7 +4,8 @@
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
-
+from .myextend import pro
+import random
 # useful for handling different item types with a single interface
 from itemadapter import is_item, ItemAdapter
 
@@ -103,20 +104,16 @@ class TutorialDownloaderMiddleware:
         spider.logger.info('Spider opened: %s' % spider.name)
 
 
-#!/usr/bin/env python
-# -- coding: utf-8 --
-
-from scrapy import signals
-from .myextend import pro
-from w3lib.http import basic_auth_header
-import random
-
-
 class ProxyDownloaderMiddleware:
 
     def process_request(self, request, spider):
         proxy = random.choice(pro.proxy_list)
-        request.meta['proxy'] = "http://%(proxy)s" % {'proxy': proxy}
+
         # 用户名密码认证(私密代理/独享代理)
-        request.headers['Proxy-Authorization'] = basic_auth_header('${username}', '${password}')  # 白名单认证可注释此行
+        username = "username"
+        password = "password"
+        request.meta['proxy'] = "http://%(user)s:%(pwd)s@%(proxy)s/" % {"user": username, "pwd": password, "proxy": proxy}
+
+        # 白名单认证(私密代理/独享代理)
+        # request.meta['proxy'] = "http://%(proxy)s/" % {"proxy": proxy}
         return None
