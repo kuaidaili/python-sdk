@@ -5,9 +5,9 @@
 
 ## 调用 API
 * 调用 API
-    * [urllib2](./examples/api/api_urllib2.py)
-    * [urllib](./examples/api/api_urllib.py)
-    * [requests](./examples/api/api_requests.py)
+    * [urllib2](./examples/api/py2_urllib2.py)
+    * [urllib](./examples/api/py3_urllib.py)
+    * [requests](./examples/api/py3_requests.py)
 
 ## HTTP 代理
 * Python2
