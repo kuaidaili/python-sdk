@@ -37,3 +37,5 @@ class EndPoint(Enum):
     SetAutoRenew = "dev.kdlapi.com/api/setautorenew"  # 开启/关闭自动续费
     CloseOrder = "dev.kdlapi.com/api/closeorder"  # 关闭订单
     QueryKpsCity = "dev.kdlapi.com/api/querykpscity"  # 查询独享代理城市信息
+
+    GetSecretToken = "auth.kdlapi.com/api/get_secret_token"  # 获取token

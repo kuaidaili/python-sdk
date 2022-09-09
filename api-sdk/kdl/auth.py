@@ -8,12 +8,12 @@ import base64
 import hashlib
 import hmac
 
-class Auth:
-    """用于保存用户orderid、apiKey，以及计算签名的对象。"""
+class Auth(object):
+    """用于保存用户secret_id、secret_key以及计算签名的对象。"""
 
-    def __init__(self, orderId, apiKey):
-        self._orderId = orderId
-        self._apiKey = apiKey
+    def __init__(self, secret_id, secret_key):
+        self.secret_id = secret_id
+        self.secret_key = secret_key
 
     @classmethod
     def get_string_to_sign(cls, method, endpoint, params):
@@ -25,15 +25,8 @@ class Auth:
     def sign_str(self, raw_str, method=hashlib.sha1):
         """ 生成签名串 """
         try:
-            hmac_str = hmac.new(self.apiKey.encode('utf8'), raw_str.encode('utf8'), method).digest()
+            hmac_str = hmac.new(self.secret_key.encode('utf8'), raw_str.encode('utf8'), method).digest()
         except UnicodeDecodeError as e:
-            hmac_str = hmac.new(self.apiKey.encode('utf8'), raw_str, method).digest()
+            hmac_str = hmac.new(self.secret_key.encode('utf8'), raw_str, method).digest()
         return base64.b64encode(hmac_str)
 
-    @property
-    def orderId(self):
-        return self._orderId
-
-    @property
-    def apiKey(self):
-        return self._apiKey
