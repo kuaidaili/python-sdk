@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """封装auth对象
-    用于保存用户orderid、apiKey，以及计算签名
+    用于保存用户secret_id、secret_key，以及计算签名
 """
 
 import base64

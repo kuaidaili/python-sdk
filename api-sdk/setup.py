@@ -10,7 +10,7 @@ else:
 
 setup(
     name='kdl',
-    version='0.2.18',
+    version='0.2.19',
     description=(
         'kuaidaili api sdk python, site: https://www.kuaidaili.com'
     ),

@@ -326,7 +326,7 @@ class Client:
         if code != 0:
             raise KdlException(code, msg)
         secret_token = res['data']['secret_token']
-        expire = res['data']['expire']
+        expire = str(res['data']['expire'])
         _time = '%.6f' % time.time()
         return secret_token, expire, _time
 
@@ -334,7 +334,7 @@ class Client:
         with open(SECRET_PATH, 'r') as f:
             token_info = f.read()
         secret_token, expire, _time = token_info.split('|')
-        if float(_time) + expire <= time.time():
+        if float(_time) + float(expire) - 3 * 60 <= time.time():  # 还有3分钟过期时更新
             secret_token, expire, _time = self._get_secret_token()
             with open(SECRET_PATH, 'w') as f:
                 f.write(secret_token + '|' + expire + '|' + _time)

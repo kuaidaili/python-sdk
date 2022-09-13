@@ -11,8 +11,8 @@ from kdl.exceptions import KdlException
 import re
 
 
-orderid = "youorderid"
-apikey = "youapikey"
+secret_id = "o4sfdlk0yfk67vy2ca2b"
+secret_key = "v35y327ruqy16vrtl6cejzjbsuljqn3g"
 
 
 
@@ -54,7 +54,7 @@ class TestBase(unittest.TestCase):
         print('%s测试结束' % cls.name)
 
     def setUp(self):
-        self.auth = Auth(orderid, apikey)
+        self.auth = Auth(secret_id, secret_key)
         self.client = Client(self.auth)
 
     def test_get_expire_time(self):
@@ -121,7 +121,10 @@ class TestDpsOrder(TestBase2):
         seconds = self.client.get_dps_valid_time(ips, sign_type="hmacsha1")
         print("seconds: ", seconds)
         assert isinstance(seconds, dict)
-    
+
+    def test_get_secret_token(self):
+        secret_token = self.client.get_secret_token()
+        print(secret_token)
    
 
 class TestKpsOrder(TestBase):
