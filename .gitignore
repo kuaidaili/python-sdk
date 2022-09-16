@@ -3,3 +3,4 @@
 .idea
 *.bat
 *.log
+.secret

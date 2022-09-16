@@ -10,7 +10,7 @@ import random
 
 page_url = "http://dev.kdlapi.com/testproxy"  # 要访问的目标网页
 # API接口，返回格式为json
-api_url = "http://dps.kdlapi.com/api/getdps?orderid=96518362xxxxxx&num=10&format=json&sep=1"
+api_url = "http://dps.kdlapi.com/api/getdps?secret_id=o1fjh1re9o28876h7c08&signature=xxxxx&num=10&format=json&sep=1"
 
 # API接口返回的ip
 proxy_ip = requests.get(api_url).json()['data']['proxy_list']

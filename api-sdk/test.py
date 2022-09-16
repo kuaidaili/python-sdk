@@ -59,8 +59,9 @@ class TestBase(unittest.TestCase):
 
     def test_get_expire_time(self):
         """ 获取订单过期时间 """
-        expire_time = self.client.get_order_expire_time(sign_type='hmacsha1')
+        expire_time = self.client.get_order_expire_time(sign_type='token')
         # assert isinstance(expire_time, unicode) or isinstance(expire_time, str)
+        print(expire_time)
         assert isinstance(expire_time, str) and is_valid_str(expire_time,time_pattern)
 
 
@@ -71,6 +72,7 @@ class TestBase2(TestBase):
     def test_get_ip_whitelist(self):
         """ 获取ip白名单 """
         ip_whitelist = self.client.get_ip_whitelist()
+        print(ip_whitelist)
         assert isinstance(ip_whitelist, list) and is_valid_ip_list(ip_whitelist,ip_pattern)
 
     def test_set_ip_whitelist(self):
@@ -86,7 +88,7 @@ class TestBase2(TestBase):
         self.client.set_ip_whitelist([])
 
     def test_get_proxy_authorization(self):
-        data = self.client.get_proxy_authorization(plain_text=1,sign_type='simple')
+        data = self.client.get_proxy_authorization(plain_text=1, sign_type='token')
         assert isinstance(data, dict)
         print(data)
 
@@ -98,7 +100,7 @@ class TestDpsOrder(TestBase2):
 
     def test_get_proxy(self):
         """ 获取私密代理 """
-        ips = self.client.get_dps(2, sign_type='hmacsha1', format='text', area='云南,广东', pt=2, f_citycode=1)
+        ips = self.client.get_dps(2, sign_type='token', format='text', area='云南,广东', pt=2, f_citycode=1)
         # ips = self.client.get_dps(2, format='text')
         print(ips)
         assert isinstance(ips, list) or isinstance(ips, str) or isinstance(ips.encode('utf8'), str) or isinstance(ips.encode('utf8'), bytes)  and is_valid_ip_list(ips,ip_port_pattern)
@@ -179,7 +181,7 @@ class TestTpsOrder(TestBase2):
 
     def test_get_tps_ip(self):
         """获取当前隧道ip"""
-        current_ip = self.client.tps_current_ip()
+        current_ip = self.client.tps_current_ip(sign_type='hmacsha1')
         assert len(current_ip) == 0 or (len(current_ip.split('.')) == 4 and is_valid_str(current_ip,ip_pattern))
 
     def test_change_tcp_ip(self):

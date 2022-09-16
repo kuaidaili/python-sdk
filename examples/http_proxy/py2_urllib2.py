@@ -13,7 +13,7 @@ import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
 # 提取代理API接口，获取1个代理IP
-api_url = "http://dps.kdlapi.com/api/getdps/?orderid=9266892014xxxxx&num=1&pt=1&sep=1"
+api_url = "http://dps.kdlapi.com/api/getdps/?secret_id=o1fjh1re9o28876h7c08&signature=xxxxx&num=1&pt=1&sep=1"
 
 # 获取API接口返回的IP
 proxy_ip = urllib2.urlopen(api_url).read()

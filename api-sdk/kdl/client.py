@@ -334,7 +334,7 @@ class Client:
         with open(SECRET_PATH, 'r') as f:
             token_info = f.read()
         secret_token, expire, _time = token_info.split('|')
-        if float(_time) + float(expire) - 3 * 60 <= time.time():  # 还有3分钟过期时更新
+        if float(_time) + float(expire) - 3 * 60 < time.time():  # 还有3分钟过期时更新
             secret_token, expire, _time = self._get_secret_token()
             with open(SECRET_PATH, 'w') as f:
                 f.write(secret_token + '|' + expire + '|' + _time)
@@ -370,7 +370,7 @@ class Client:
             params["signature"] = self.auth.sign_str(raw_str)
         elif sign_type == "token":
             secret_token = self.get_secret_token()
-            params['secret_token'] = secret_token
+            params['signature'] = secret_token
         else:
             raise KdlNameError("unknown sign_type {}".format(sign_type))
 
@@ -386,8 +386,7 @@ class Client:
             if method == "GET":
                 r = requests.get("https://" + endpoint, params=params)
             elif method == "POST":
-                r = requests.post("https://" + endpoint, data=params)
-
+                r = requests.post("https://" + endpoint, data=params, headers={"Content-Type": "application/x-www-form-urlencoded"})
             if r.status_code != 200:
                 raise KdlStatusError(r.status_code, r.content.decode('utf8'))
             try:

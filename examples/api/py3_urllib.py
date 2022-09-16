@@ -8,7 +8,7 @@ import urllib.request
 import zlib
 
 #api链接
-api_url = "http://dev.kdlapi.com/api/getproxy/?orderid=96518362xxxxxx&num=100&protocol=1&method=2&an_ha=1&sep=1"
+api_url = "http://dev.kdlapi.com/api/getproxy/?secret_id=o1fjh1re9o28876h7c08&signature=xxxxx&num=100&protocol=1&method=2&an_ha=1&sep=1"
 
 headers = {"Accept-Encoding": "Gzip"}  #使用gzip压缩传输数据让访问更快
 

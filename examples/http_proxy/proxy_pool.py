@@ -11,15 +11,16 @@ import requests
 
 class ProxyPool():
 
-    def __init__(self, orderid, proxy_count):
-        self.orderid = orderid
+    def __init__(self, secret_id, secret_token, proxy_count):
+        self.secret_id = secret_id
+        self.signature = secret_token
         self.proxy_count = proxy_count if proxy_count < 50 else 50 # 池子维护的IP总数，建议一般不要超过50
         self.alive_proxy_list = []  # 活跃IP列表
 
     def _fetch_proxy_list(self, count):
         """调用快代理API获取代理IP列表"""
         try:
-            res = requests.get("http://dps.kdlapi.com/api/getdps/?orderid=%s&num=%s&pt=1&sep=1&f_et=1&format=json" % (self.orderid, count))
+            res = requests.get("http://dps.kdlapi.com/api/getdps/?secret_id=%s&signature=%s&num=%s&pt=1&sep=1&f_et=1&format=json" % (self.secret_id, self.signature, count))
             return [proxy.split(',') for proxy in res.json().get('data').get('proxy_list')]
         except:
             print("API获取IP异常，请检查订单")
@@ -81,7 +82,7 @@ def parse_url(proxy):
 
 
 if __name__ == '__main__':
-    proxy_pool = ProxyPool('9266892014xxxxx',30) # 订单号, 池子中维护的IP数
+    proxy_pool = ProxyPool('o1fjh1re9o28876h7c08', 'xxxxxx', 30) # 订单SecretId, 签名(secret_token), 池子中维护的IP数
     proxy_pool.start()
     time.sleep(1)  # 等待IP池初始化
 

@@ -15,7 +15,7 @@ import requests
 page_url = "http://icanhazip.com/"  # 要访问的目标网页
 
 # API接口，返回格式为json
-api_url = "http://dps.kdlapi.com/api/getdps/?orderid=9266892014xxxxx&num=10&pt=1&format=json&sep=1"  # API接口
+api_url = "http://dps.kdlapi.com/api/getdps/?secret_id=o1fjh1re9o28876h7c08&signature=xxxxx&num=10&pt=1&format=json&sep=1"  # API接口
 
 # API接口返回的proxy_list
 proxy_list = requests.get(api_url).json().get('data').get('proxy_list')
