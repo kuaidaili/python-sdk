@@ -11,8 +11,8 @@ from kdl.exceptions import KdlException
 import re
 
 
-secret_id = "o4sfdlk0yfk67vy2ca2b"
-secret_key = "v35y327ruqy16vrtl6cejzjbsuljqn3g"
+secret_id = ""
+secret_key = ""
 
 
 
