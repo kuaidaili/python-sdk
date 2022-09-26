@@ -8,7 +8,7 @@
 
 import kdl
 
-auth = kdl.Auth("test_order_id", "test_api_key")
+auth = kdl.Auth("secret_id", "secret_key")
 client = kdl.Client(auth)
 
 # 获取订单到期时间, 返回时间字符串

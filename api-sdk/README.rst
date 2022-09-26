@@ -8,12 +8,12 @@
 
 1. python2.7 到 python3.7
 2. 从 `快代理 <https://www.kuaidaili.com>`_ 购买相应产品
-3. `获取订单的orderId和apiKey <https://www.kuaidaili.com/usercenter/api/settings/>`_
+3. `获取订单的secret_id和secret_key <https://www.kuaidaili.com/usercenter/api/secret/>`_
 
 =========
 获取安装:
 =========
-安装 Python SDK 前，请先获取订单对应的订单号和apiKey。 订单号是用于标识订单，apiKey 是用于加密签名字符串和服务器端验证签名字符串的密钥。apiKey 必须严格保管，避免泄露。
+安装 Python SDK 前，请先获取订单对应的`secret_id`和`secret_key`，请严格保管，避免泄露。
 
 通过pip安装(推荐)
 ===================
@@ -49,13 +49,13 @@
  """
     私密代理使用示例
     接口鉴权说明：
-    目前支持的鉴权方式有 "simple" 和 "hmacsha1" 两种，默认使用 "simple"鉴权。
+    目前支持的鉴权方式有 "token" 和 "hmacsha1" 两种，默认使用 "token"鉴权。
     所有方法均可添加关键字参数sign_type修改鉴权方式。
  """
 
  import kdl
 
- auth = kdl.Auth("yourorderid", "yourorderapikey")
+ auth = kdl.Auth("secret_id", "secret_key")
  client = kdl.Client(auth)
 
  # 获取订单到期时间, 返回时间字符串
@@ -83,7 +83,7 @@
 
 
  # 检测私密代理有效性： 返回 ip: true/false 组成的dict
- ips = client.get_dps(2, sign_type='simple', format='json')
+ ips = client.get_dps(2, sign_type='token', format='json')
  valids = client.check_dps_valid(ips)
  print("valids: ", valids)
 
