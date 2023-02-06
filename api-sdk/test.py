@@ -55,11 +55,11 @@ class TestBase(unittest.TestCase):
 
     def setUp(self):
         self.auth = Auth(secret_id, secret_key)
-        self.client = Client(self.auth)
+        self.client = Client(self.auth, timeout=(5, 6), max_retries=3)
 
     def test_get_expire_time(self):
         """ 获取订单过期时间 """
-        expire_time = self.client.get_order_expire_time(sign_type='token')
+        expire_time = self.client.get_order_expire_time(sign_type='hmacsha1')
         # assert isinstance(expire_time, unicode) or isinstance(expire_time, str)
         print(expire_time)
         assert isinstance(expire_time, str) and is_valid_str(expire_time,time_pattern)
@@ -100,7 +100,7 @@ class TestDpsOrder(TestBase2):
 
     def test_get_proxy(self):
         """ 获取私密代理 """
-        ips = self.client.get_dps(2, sign_type='token', format='text', area='云南,广东', pt=2, f_citycode=1)
+        ips = self.client.get_dps(2, sign_type='hmacsha1', format='text', area='云南,广东', pt=2, f_citycode=1, )
         # ips = self.client.get_dps(2, format='text')
         print(ips)
         assert isinstance(ips, list) or isinstance(ips, str) or isinstance(ips.encode('utf8'), str) or isinstance(ips.encode('utf8'), bytes)  and is_valid_ip_list(ips,ip_port_pattern)
@@ -135,7 +135,7 @@ class TestKpsOrder(TestBase):
 
     def test_get_proxy(self):
         """ 获取私密代理 """
-        ips = self.client.get_kps(2, sign_type='hmacsha1', format='json', area='云南,广东', pt=2, f_citycode=1)
+        ips = self.client.get_kps(2, sign_type='token', format='json', area='云南,广东', pt=2, f_citycode=1)
         assert isinstance(ips, list) or isinstance(ips, str) or isinstance(ips.encode('utf8'), str) or isinstance(ips.encode('utf8'), bytes) and  is_valid_ip_list(ips,ip_port_pattern)
 
     def test_check_dps_valid(self):

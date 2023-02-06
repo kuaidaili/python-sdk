@@ -44,7 +44,7 @@ $ python setup.py install
 import kdl
 
 auth = kdl.Auth("secret_id", "secret_key")
-client = kdl.Client(auth)
+client = kdl.Client(auth, timeout=(8, 12), max_retries=3)
 
 # 获取订单到期时间, 返回时间字符串
 expire_time = client.get_order_expire_time()
