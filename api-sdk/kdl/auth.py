@@ -18,9 +18,17 @@ class Auth(object):
     @classmethod
     def get_string_to_sign(cls, method, endpoint, params):
         """ 生成签名原文字符串 """
+        cls.clear_req_params(params)
         s = method + endpoint.split('.com')[1] + '?'
         query_str = '&'.join("%s=%s" % (k, params[k]) for k in sorted(params))
         return s + query_str
+
+    @classmethod
+    def clear_req_params(cls, params):
+        if 'timeout' in params:
+            del params['timeout']
+        if 'max_retries' in params:
+            del params['max_retries']
 
     def sign_str(self, raw_str, method=hashlib.sha1):
         """ 生成签名串 """

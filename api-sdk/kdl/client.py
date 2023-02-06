@@ -7,6 +7,7 @@ import json
 import os
 import time
 import requests
+from requests.adapters import HTTPAdapter
 
 from kdl.endpoint import EndPoint
 from kdl.exceptions import KdlException, KdlNameError, KdlTypeError, KdlStatusError
@@ -17,46 +18,49 @@ SECRET_PATH = './.secret'
 
 
 class Client:
-    def __init__(self, auth):
+    def __init__(self, auth, timeout=None, max_retries=None):
         self.auth = auth
+        self.session = requests.Session()
+        self.timeout = timeout or (6, 8)  # default (connect_timeout, read_timeout)
+        self.max_retries = max_retries
 
-    def get_order_expire_time(self, sign_type="token"):
+    def get_order_expire_time(self, sign_type="token", timeout=None, max_retries=None):
         """获取订单到期时间, 强制签名验证
            :return 订单过期时间字符串
         """
 
         endpoint = EndPoint.GetOrderExpireTime.value
-        params = self._get_params(endpoint, sign_type=sign_type)
+        params = self._get_params(endpoint, sign_type=sign_type, timeout=timeout, max_retries=max_retries)
         res = self._get_base_res("GET", endpoint, params)
 
         if isinstance(res, dict):
             return res['data']['expire_time']
         return res
 
-    def get_proxy_authorization(self, plain_text=0, sign_type="token"):
+    def get_proxy_authorization(self, plain_text=0, sign_type="token", timeout=None, max_retries=None):
         """获取指定订单访问代理IP的鉴权信息。
         鉴权信息包含用户名密码，用于请求私密代理/独享代理/隧道代理时进行身份验证。
             :return 返回信息的字典
         """
         endpoint = EndPoint.GetProxyAuthorization.value
-        params = self._get_params(endpoint, plaintext=plain_text, sign_type=sign_type)
+        params = self._get_params(endpoint, plaintext=plain_text, sign_type=sign_type, timeout=timeout, max_retries=max_retries)
         res = self._get_base_res("GET", endpoint, params)
         if isinstance(res, dict):
             return res['data']
         return res
 
-    def get_ip_whitelist(self, sign_type="token"):
+    def get_ip_whitelist(self, sign_type="token", timeout=None, max_retries=None):
         """获取订单的ip白名单, 强制签名验证
            :return ip白名单列表
         """
         endpoint = EndPoint.GetIpWhitelist.value
-        params = self._get_params(endpoint, sign_type=sign_type)
+        params = self._get_params(endpoint, sign_type=sign_type, timeout=timeout, max_retries=max_retries)
         res = self._get_base_res("GET", endpoint, params)
         if isinstance(res, dict):
             return res['data']['ipwhitelist']
         return res
 
-    def set_ip_whitelist(self, iplist=None, sign_type="token"):
+    def set_ip_whitelist(self, iplist=None, sign_type="token", timeout=None, max_retries=None):
         """设置订单的ip白名单, 强制签名验证
            :param iplist参数类型为 str 或 list 或 tuple
                   如果为字符串则ip之间用逗号隔开
@@ -70,28 +74,28 @@ class Client:
         if isinstance(iplist, list) or isinstance(iplist, tuple):
             iplist = ','.join(iplist)
         endpoint = EndPoint.SetIpWhitelist.value
-        params = self._get_params(endpoint, iplist=iplist, sign_type=sign_type)
+        params = self._get_params(endpoint, iplist=iplist, sign_type=sign_type, timeout=timeout, max_retries=max_retries)
         self._get_base_res("POST", endpoint, params)
         return True
 
-    def tps_current_ip(self, sign_type="token"):
+    def tps_current_ip(self, sign_type="token", timeout=None, max_retries=None):
         """仅支持支持换IP周期>=1分钟的隧道代理订单
            获取隧道当前的IP，默认“token”鉴权
            :param sign_type:默认token
            :return:返回ip地址。
         """
         endpoint = EndPoint.TpsCurrentIp.value
-        params = self._get_params(endpoint, sign_type=sign_type)
+        params = self._get_params(endpoint, sign_type=sign_type, timeout=timeout, max_retries=max_retries)
         res = self._get_base_res("GET", endpoint, params)
         return res['data']['current_ip']
 
-    def change_tps_ip(self, sign_type="token"):
+    def change_tps_ip(self, sign_type="token", timeout=None, max_retries=None):
         """仅支持支持换IP周期>=1分钟的隧道代理订单
            :param sign_type: 默认token
            :return: 返回新的IP地址
         """
         endpoint = EndPoint.ChangeTpsIp.value
-        params = self._get_params(endpoint, sign_type=sign_type)
+        params = self._get_params(endpoint, sign_type=sign_type, timeout=timeout, max_retries=max_retries)
         res = self._get_base_res("GET", endpoint, params)
         return res['data']['new_ip']
 
@@ -165,13 +169,13 @@ class Client:
             return res['data']
         return res
 
-    def get_ip_balance(self, sign_type="token"):
+    def get_ip_balance(self, sign_type="token", timeout=None, max_retries=None):
         """获取计数版订单ip余额, 强制签名验证,
            此接口只对按量付费订单和包年包月的集中提取型订单有效
            :return 返回data中的balance字段, int类型
         """
         endpoint = EndPoint.GetIpBalance.value
-        params = self._get_params(endpoint, sign_type=sign_type)
+        params = self._get_params(endpoint, sign_type=sign_type, timeout=timeout, max_retries=max_retries)
         res = self._get_base_res("GET", endpoint, params)
         if isinstance(res, dict):
             return res['data']['balance']
@@ -317,10 +321,21 @@ class Client:
         res = self._get_base_res("GET", endpoint, params)
         return res
 
-    def _get_secret_token(self):
-        r = requests.post(url='https://' + EndPoint.GetSecretToken.value, data={'secret_id': self.auth.secret_id, 'secret_key': self.auth.secret_key})
-        if r.status_code != 200:
-            raise KdlStatusError(r.status_code, r.content.decode('utf8'))
+    def _get_secret_token(self, timeout=None, max_retries=None):
+        try:
+            timeout = timeout or self.timeout
+            max_retries = max_retries or self.max_retries
+            self.session.mount('http://', HTTPAdapter(max_retries=max_retries))
+            self.session.mount('https://', HTTPAdapter(max_retries=max_retries))
+            r = self.session.post(url='https://' + EndPoint.GetSecretToken.value,
+                                  data={'secret_id': self.auth.secret_id, 'secret_key': self.auth.secret_key},
+                                  timeout=timeout)
+            if r.status_code != 200:
+                raise KdlStatusError(r.status_code, r.content.decode('utf8'))
+        except requests.exceptions.RequestException as e:
+            pass  # TODO: 重试后失败 处理
+            raise e
+
         res = json.loads(r.content.decode('utf8'))
         code, msg = res['code'], res['msg']
         if code != 0:
@@ -364,9 +379,9 @@ class Client:
         if sign_type == "hmacsha1":
             params['timestamp'] = int(time.time())
             if endpoint == EndPoint.SetIpWhitelist.value:
-                raw_str = self.auth.get_string_to_sign("POST", endpoint, params)
+                raw_str = self.auth.get_string_to_sign("POST", endpoint, params.copy())
             else:
-                raw_str = self.auth.get_string_to_sign("GET", endpoint, params)
+                raw_str = self.auth.get_string_to_sign("GET", endpoint, params.copy())
             params["signature"] = self.auth.sign_str(raw_str)
         elif sign_type == "token":
             secret_token = self.get_secret_token()
@@ -383,10 +398,16 @@ class Client:
         """
         try:
             r = None
+            timeout = params.get('timeout', '') or self.timeout
+            max_retries = params.get('max_retries', '') or self.max_retries
+            self.session.mount('http://', HTTPAdapter(max_retries=max_retries))
+            self.session.mount('https://', HTTPAdapter(max_retries=max_retries))
+            self.auth.clear_req_params(params)
+
             if method == "GET":
-                r = requests.get("https://" + endpoint, params=params)
+                r = requests.get("https://" + endpoint, params=params, timeout=timeout)
             elif method == "POST":
-                r = requests.post("https://" + endpoint, data=params, headers={"Content-Type": "application/x-www-form-urlencoded"})
+                r = requests.post("https://" + endpoint, data=params, headers={"Content-Type": "application/x-www-form-urlencoded"}, timeout=timeout)
             if r.status_code != 200:
                 raise KdlStatusError(r.status_code, r.content.decode('utf8'))
             try:
