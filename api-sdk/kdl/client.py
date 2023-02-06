@@ -11,7 +11,7 @@ import requests
 from kdl.endpoint import EndPoint
 from kdl.exceptions import KdlException, KdlNameError, KdlTypeError, KdlStatusError
 from kdl.utils import OpsOrderLevel
-
+from retrying import retry
 
 SECRET_PATH = './.secret'
 
@@ -273,7 +273,7 @@ class Client:
         if not (product and pay_type):
             raise KdlNameError('miss param: product or pay_type')
         endpoint = EndPoint.CreateOrder.value
-        params = self._get_params(endpoint,product=product, pay_type=pay_type, sign_type="hmacsha1", **kwargs)
+        params = self._get_params(endpoint, product=product, pay_type=pay_type, sign_type="hmacsha1", **kwargs)
         res = self._get_base_res("GET", endpoint, params)
         return res
 
@@ -317,8 +317,9 @@ class Client:
         res = self._get_base_res("GET", endpoint, params)
         return res
 
+    @retry(stop_max_attempt_number=3)
     def _get_secret_token(self):
-        r = requests.post(url='https://' + EndPoint.GetSecretToken.value, data={'secret_id': self.auth.secret_id, 'secret_key': self.auth.secret_key})
+        r = requests.post(url='https://' + EndPoint.GetSecretToken.value, timeout=3, data={'secret_id': self.auth.secret_id, 'secret_key': self.auth.secret_key})
         if r.status_code != 200:
             raise KdlStatusError(r.status_code, r.content.decode('utf8'))
         res = json.loads(r.content.decode('utf8'))
@@ -376,6 +377,7 @@ class Client:
 
         return params
 
+    @retry(stop_max_attempt_number=3)
     def _get_base_res(self, method, endpoint, params):
         """处理基础请求,
            若响应为json格式则返回请求结果dict
@@ -384,9 +386,9 @@ class Client:
         try:
             r = None
             if method == "GET":
-                r = requests.get("https://" + endpoint, params=params)
+                r = requests.get("https://" + endpoint, params=params, timeout=3)
             elif method == "POST":
-                r = requests.post("https://" + endpoint, data=params, headers={"Content-Type": "application/x-www-form-urlencoded"})
+                r = requests.post("https://" + endpoint, data=params, timeout=3, headers={"Content-Type": "application/x-www-form-urlencoded"})
             if r.status_code != 200:
                 raise KdlStatusError(r.status_code, r.content.decode('utf8'))
             try:

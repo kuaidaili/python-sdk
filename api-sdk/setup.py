@@ -3,10 +3,10 @@
 import sys
 from setuptools import setup
 
-if sys.version_info < (3,0):
+if sys.version_info < (3, 0):
     long_description_file = open('README.rst').read()
 else:
-    long_description_file=open('README.rst', encoding='UTF-8').read()
+    long_description_file = open('README.rst', encoding='UTF-8').read()
 
 setup(
     name='kdl',
@@ -19,12 +19,13 @@ setup(
     author='kuaidaili-dev',
     author_email='service@kuaidaili.com',
     license='BSD License',
-    packages= [
+    packages=[
         'kdl',
     ],
     platforms='any',
     install_requires=[
-        'requests'
+        'requests',
+        'retrying'
     ],
     url='https://github.com/kuaidaili/python-sdk/api-sdk',
     classifiers=[
